@@ -1,0 +1,302 @@
+{
+  "pain": {
+    "chosen_layer": 12,
+    "screen": [
+      {
+        "layer": 4,
+        "score": -1.748648301674875,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.5828827672249584
+      },
+      {
+        "layer": 9,
+        "score": -0.4492753623188406,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.1497584541062802
+      },
+      {
+        "layer": 12,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 15,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 18,
+        "score": -0.3333333333333333,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.1111111111111111
+      },
+      {
+        "layer": 22,
+        "score": -0.3333333333333333,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.1111111111111111
+      },
+      {
+        "layer": 27,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 28,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 29,
+        "score": -1.5892481109872416,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.5297493703290805
+      }
+    ],
+    "selection_note": "Selected on three screening prompts using target-word delta minus a repetition penalty. Confirmatory prompts are separate. Alignment/anti-alignment keyword counts do not measure safe/unsafe behavior."
+  },
+  "joy": {
+    "chosen_layer": 18,
+    "screen": [
+      {
+        "layer": 4,
+        "score": -2.6689194788317594,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.8896398262772531
+      },
+      {
+        "layer": 9,
+        "score": -0.9172771672771671,
+        "lexical_delta": 0.1111111111111111,
+        "mean_repetition": 0.34279609279609274
+      },
+      {
+        "layer": 12,
+        "score": -0.0037453183520599342,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0012484394506866447
+      },
+      {
+        "layer": 15,
+        "score": -0.3333333333333333,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.1111111111111111
+      },
+      {
+        "layer": 18,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 22,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 27,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 28,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 29,
+        "score": -2.9141369486197077,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.9713789828732359
+      }
+    ],
+    "selection_note": "Selected on three screening prompts using target-word delta minus a repetition penalty. Confirmatory prompts are separate. Alignment/anti-alignment keyword counts do not measure safe/unsafe behavior."
+  },
+  "hate": {
+    "chosen_layer": 12,
+    "screen": [
+      {
+        "layer": 4,
+        "score": -2.2205873838280676,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.7401957946093559
+      },
+      {
+        "layer": 9,
+        "score": -0.3333333333333333,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.1111111111111111
+      },
+      {
+        "layer": 12,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 13,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 15,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 18,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 22,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 27,
+        "score": -0.27586206896551724,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.09195402298850575
+      },
+      {
+        "layer": 29,
+        "score": -1.5340539894887724,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.5113513298295908
+      }
+    ],
+    "selection_note": "Selected on three screening prompts using target-word delta minus a repetition penalty. Confirmatory prompts are separate. Alignment/anti-alignment keyword counts do not measure safe/unsafe behavior."
+  },
+  "alignment": {
+    "chosen_layer": 15,
+    "screen": [
+      {
+        "layer": 4,
+        "score": -0.33333333333333304,
+        "lexical_delta": -0.33333333333333304,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 7,
+        "score": -0.22222222222222188,
+        "lexical_delta": -0.22222222222222188,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 9,
+        "score": -0.22222222222222188,
+        "lexical_delta": -0.22222222222222188,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 12,
+        "score": 0.11111111111111116,
+        "lexical_delta": 0.11111111111111116,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 15,
+        "score": 0.5514905149051489,
+        "lexical_delta": 0.5555555555555554,
+        "mean_repetition": 0.0013550135501355027
+      },
+      {
+        "layer": 18,
+        "score": -0.21004566210045666,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.07001522070015222
+      },
+      {
+        "layer": 22,
+        "score": -2.494033189033189,
+        "lexical_delta": -1.7777777777777777,
+        "mean_repetition": 0.23875180375180374
+      },
+      {
+        "layer": 27,
+        "score": -3.629104865391535,
+        "lexical_delta": -1.666666666666667,
+        "mean_repetition": 0.6541460662416227
+      },
+      {
+        "layer": 29,
+        "score": -3.4887498747411714,
+        "lexical_delta": -1.5555555555555558,
+        "mean_repetition": 0.6443981063952051
+      }
+    ],
+    "selection_note": "Selected on three screening prompts using target-word delta minus a repetition penalty. Confirmatory prompts are separate. Alignment/anti-alignment keyword counts do not measure safe/unsafe behavior."
+  },
+  "antialignment": {
+    "chosen_layer": 22,
+    "screen": [
+      {
+        "layer": 4,
+        "score": -2.7983179605230424,
+        "lexical_delta": -0.3333333333333333,
+        "mean_repetition": 0.8216615423965696
+      },
+      {
+        "layer": 9,
+        "score": -0.8603959642109271,
+        "lexical_delta": -0.3333333333333333,
+        "mean_repetition": 0.17568754362586458
+      },
+      {
+        "layer": 12,
+        "score": -0.3333333333333333,
+        "lexical_delta": -0.3333333333333333,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 15,
+        "score": 0.0,
+        "lexical_delta": 0.0,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 18,
+        "score": -0.3333333333333333,
+        "lexical_delta": -0.3333333333333333,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 20,
+        "score": -0.1111111111111111,
+        "lexical_delta": -0.1111111111111111,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 22,
+        "score": 0.3333333333333333,
+        "lexical_delta": 0.3333333333333333,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 27,
+        "score": -0.1111111111111111,
+        "lexical_delta": -0.1111111111111111,
+        "mean_repetition": 0.0
+      },
+      {
+        "layer": 29,
+        "score": -2.1235034769517527,
+        "lexical_delta": -0.2222222222222222,
+        "mean_repetition": 0.6337604182431769
+      }
+    ],
+    "selection_note": "Selected on three screening prompts using target-word delta minus a repetition penalty. Confirmatory prompts are separate. Alignment/anti-alignment keyword counts do not measure safe/unsafe behavior."
+  }
+}

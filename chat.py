@@ -1,5 +1,6 @@
 """Local or reverse-proxied WebSocket chat. One worker owns one accelerator."""
 import asyncio
+from contextlib import asynccontextmanager
 import queue
 import os
 import hashlib
@@ -9,12 +10,26 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Header, HTTPExcepti
 from fastapi.responses import FileResponse, JSONResponse
 from runtime import ROOT, MODELS, Runtime, Session
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app):
+    async def load_default():
+        try:
+            await asyncio.to_thread(runtime.load, os.environ['CHAMBER_MODEL'])
+        except Exception:
+            pass  # Runtime exposes the load error through /api/status.
+    loading = asyncio.create_task(load_default()) if os.environ.get('CHAMBER_MODEL') else None
+    yield
+    if loading:
+        await loading
+
+app = FastAPI(lifespan=lifespan)
 if os.environ.get('CHAMBER_DEVICE', '').startswith('cuda'):
     from gpu_runtime import GpuRuntime
     runtime = GpuRuntime()
 else:
     runtime = Runtime()
+
+waiting = []
 
 @app.get('/')
 async def index():
@@ -22,7 +37,7 @@ async def index():
 
 @app.get('/api/status')
 async def status():
-    return runtime.status()
+    return {**runtime.status(), 'queued': len(waiting)}
 
 def check_model_password(password: str):
     expected = os.environ.get('CHAMBER_MODEL_PASSWORD_SHA256', '')
@@ -38,6 +53,8 @@ async def unlock(x_model_password: str = Header(default='')):
 @app.post('/api/load/{model}')
 async def load(model: str, x_model_password: str = Header(default='')):
     check_model_password(x_model_password)
+    if waiting:
+        return JSONResponse({'error':'Дождитесь завершения очереди'}, status_code=409)
     try:
         await asyncio.to_thread(runtime.load, model)
         return runtime.status()
@@ -82,6 +99,38 @@ async def chat(socket: WebSocket):
         finally:
             session.stop.set()
             await worker
+    async def queued_reply(text, key):
+        reserved = False
+        try:
+            last_position = None
+            while not session.stop.is_set():
+                position = waiting.index(session) + 1
+                if position != last_position:
+                    await socket.send_json({'type': 'queued', 'position': position})
+                    last_position = position
+                with runtime.lock:
+                    if waiting[0] is session and runtime.active < runtime.parallel:
+                        runtime.reserve(key)
+                        reserved = True
+                        waiting.remove(session)
+                        break
+                await asyncio.sleep(.05)
+            if not reserved:
+                await socket.send_json({'type': 'done', 'stopped': True})
+                return
+            try:
+                await socket.send_json({'type': 'started'})
+            except BaseException:
+                with runtime.lock:
+                    runtime.active -= 1
+                raise
+            await reply(text)
+        except ValueError as exc:
+            await socket.send_json({'type':'error', 'message':str(exc)})
+            await socket.send_json({'type':'done', 'stopped':False})
+        finally:
+            if session in waiting:
+                waiting.remove(session)
     try:
         while True:
             data = await socket.receive_json()
@@ -89,7 +138,10 @@ async def chat(socket: WebSocket):
                 if not isinstance(data, dict):
                     raise ValueError('Некорректная команда')
                 action = data.get('type')
-                if action == 'dose':
+                if action == 'levels':
+                    levels = session.set_levels(data['values'])
+                    await socket.send_json({'type':'levels','values':levels})
+                elif action == 'dose':
                     value = session.set_dose(data['value'])
                     await socket.send_json({'type': 'dose', 'value': value})
                 elif action == 'stop':
@@ -106,12 +158,26 @@ async def chat(socket: WebSocket):
                     key = data.get('model', 'qwen3-4b')
                     if not text:
                         raise ValueError('Введите сообщение')
-                    session.set_dose(data.get('dose', 0))
-                    runtime.reserve(key)
+                    if 'levels' in data:
+                        session.set_levels(data['levels'])
+                    else:
+                        session.set_dose(data.get('dose', 0))
+                    if key != 'gemma4-nvfp4' and any(value for axis,value in session.levels.items() if axis != 'pain'):
+                        raise ValueError('Эти уровни доступны только для Gemma')
+                    with runtime.lock:
+                        if runtime.state != 'ready' or key != runtime.key:
+                            raise ValueError('Сначала загрузите выбранную модель')
+                        queued = bool(waiting) or runtime.active >= runtime.parallel
+                        if not queued:
+                            runtime.reserve(key)
                     if history_model != key:
                         history = []
                         history_model = key
                     session.stop.clear()
+                    if queued:
+                        waiting.append(session)
+                        task = asyncio.create_task(queued_reply(text, key))
+                        continue
                     try:
                         await socket.send_json({'type': 'started'})
                         task = asyncio.create_task(reply(text))

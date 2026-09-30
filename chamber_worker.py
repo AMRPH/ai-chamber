@@ -41,3 +41,38 @@ class SteeringWorker:
     def chamber_captures(self):
         values, self._chamber_captures = self._chamber_captures, {}
         return values
+
+    def chamber_setup_multi(self, specs):
+        if hasattr(self, '_chamber_handle'):
+            self._chamber_handle.remove()
+        for handle in getattr(self, '_chamber_multi_handles', []):
+            handle.remove()
+        self._chamber_multi_handles = []
+        self._chamber_doses = {}
+        by_layer = {}
+        for axis, spec in specs.items():
+            vector = torch.tensor(spec['vector'], device=self.device, dtype=torch.bfloat16)
+            if vector.ndim != 1 or not torch.isfinite(vector).all():
+                raise ValueError('Invalid steering vector')
+            by_layer.setdefault(spec['layer'], {})[axis] = vector
+        for layer, vectors in by_layer.items():
+            candidates = [(name, mod) for name, mod in self.model_runner.model.named_modules()
+                          if name.endswith(f'layers.{layer}') and 'DecoderLayer' in type(mod).__name__]
+            if len(candidates) != 1:
+                raise RuntimeError(f'Expected one decoder layer {layer}')
+            def hook(module, inputs, output, vectors=vectors):
+                hidden = output[0] if isinstance(output, tuple) else output
+                batch = self.model_runner.input_batch
+                offsets = self.model_runner.query_start_loc.cpu[:batch.num_reqs + 1].tolist()
+                for i, rid in enumerate(batch.req_ids[:batch.num_reqs]):
+                    start, end = offsets[i:i+2]
+                    if end > hidden.shape[0]:
+                        raise RuntimeError('vLLM token-to-request mapping is invalid')
+                    levels = self._chamber_doses.get(rid, {})
+                    for axis, vector in vectors.items():
+                        value = levels.get(axis, 0)
+                        if value:
+                            hidden[start:end] += vector.to(hidden.dtype) * value
+                return output
+            self._chamber_multi_handles.append(candidates[0][1].register_forward_hook(hook))
+        return sorted(by_layer)

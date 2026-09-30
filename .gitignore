@@ -6,3 +6,7 @@ __pycache__/
 *.log
 
 .env
+
+research/results/**/activations.npz
+research/results/activations.npz
+research/results/capture-batch.pt

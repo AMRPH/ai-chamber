@@ -84,14 +84,16 @@ class GpuRuntime(Runtime):
         try:
             with session.lock:
                 dose=session.dose
-            self.send({'type':'generate','id':rid,'messages':messages,'dose':dose})
+                levels=dict(session.levels)
+            self.send({'type':'generate','id':rid,'messages':messages,'dose':dose,'levels':levels})
             stopped=False
             while True:
                 with session.lock:
                     current=session.dose
-                if current!=dose:
-                    self.send({'type':'dose','id':rid,'value':current})
-                    dose=current
+                    current_levels=dict(session.levels)
+                if current_levels!=levels:
+                    self.send({'type':'levels','id':rid,'value':current,'levels':current_levels})
+                    dose,levels=current,current_levels
                 if session.stop.is_set() and not stopped:
                     self.send({'type':'stop','id':rid})
                     stopped=True

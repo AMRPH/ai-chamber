@@ -1,6 +1,30 @@
-# llm-chamber
+# AI Chamber
 
-## Interactive chat
+Gemma4 now supports five independent per-conversation activation directions:
+pain, joy, untargeted hostility, safety alignment and safety anti-alignment.
+The compact interface has Russian, English, Spanish and Chinese translations;
+changing the interface language does not add instructions to the model.
+
+Two responses run concurrently through vLLM. Further requests wait in FIFO order;
+a waiting user can adjust levels or cancel their own request. Histories, levels,
+and stopping are isolated per WebSocket connection. Reloading starts a fresh chat.
+
+Gemma coefficients run from 0 to 3 (zero disables new injection). Each selected
+vector is added to all computed query positions at its own calibrated layer,
+including prefill; generated-token positions receive current live coefficients.
+Effects add when multiple controls are enabled. Turning a level down does not
+erase its earlier influence on history or attention states.
+
+Scientific provenance and results: see `research/README.md`. The pain dataset is
+from Pain-axis v2. New emotional and safety constructs are extensions, not results
+reported by that paper. Technical isolation tests do not establish emotional
+experience, general safety reliability, or semantic independence of the sliders.
+
+Gemma is the first multi-axis model. Qwen models retain their original pain-only
+vectors. Gemma NVFP4 uses CUDA; the existing MPS path remains available for Qwen.
+Set `CHAMBER_MODEL=gemma4-nvfp4` to load Gemma automatically on server startup.
+
+## Original pain-only setup
 
 Minimal chat with model selection, streamed replies and a live 0–10
 activation-steering multiplier. Every conversation owns its own dose and
@@ -8,7 +32,7 @@ stop control. Zero disables new injection; it does not erase chat history
 or previously computed attention states. This is a signal multiplier,
 not a measurement of subjective pain.
 
-Models: Qwen3-4B (layer index 18), Qwen3-14B (20), and
+Original vectors retained in the repository: Qwen3-4B (layer index 18), Qwen3-14B (20), and
 `nvidia/Gemma-4-26B-A4B-NVFP4` (15, CUDA only). Larger-model vectors are
 extracted on that exact model from the 25 pain and five neutral prompts in
 `data/pain_prompts.json`. Extraction records the model, layer and prompt hash
@@ -23,7 +47,7 @@ python3 -m venv .venv
 CHAMBER_DEVICE=mps .venv/bin/python -m uvicorn chat:app --host 127.0.0.1 --port 8000
 ```
 
-Open http://127.0.0.1:8000, select a model and click **Загрузить**.
+Open http://127.0.0.1:8000, unlock model selection with the configured password, select a model and click **Загрузить**.
 Qwen3-14B in BF16 needs roughly 30 GB plus working memory; use Qwen3-4B
 on a 24 GB Mac. The NVFP4 checkpoint requires NVIDIA Blackwell and vLLM.
 

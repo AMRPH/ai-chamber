@@ -64,7 +64,15 @@ def main():
         data = json.loads(path.read_text())
         if data.get('model_id',spec['id']) != spec['id'] or data.get('layer',spec['layer']) != spec['layer']:
             raise RuntimeError('Vector metadata does not match model')
-        location = llm.collective_rpc('chamber_setup',args=(spec['layer'],data['pain_v'],False))[0]
+        multi_path = ROOT / spec.get('multi_vector', 'missing-multi.json')
+        multi = multi_path.exists()
+        if multi:
+            bundle = json.loads(multi_path.read_text())
+            if bundle['model_id'] != spec['id']:
+                raise RuntimeError('Multi-vector metadata does not match model')
+            location = llm.collective_rpc('chamber_setup_multi', args=(bundle['axes'],))[0]
+        else:
+            location = llm.collective_rpc('chamber_setup',args=(spec['layer'],data['pain_v'],False))[0]
         emit({'type':'ready','device':'cuda:0','layer':location})
         commands = queue.Queue()
         def read():
@@ -88,8 +96,8 @@ def main():
                 if kind == 'shutdown':
                     engine.engine_core.shutdown()
                     return
-                if kind == 'dose' and rid in requests:
-                    requests[rid]['dose'] = command['value']
+                if kind in ('dose', 'levels') and rid in requests:
+                    requests[rid]['dose'] = command.get('levels', {'pain':command.get('value',0)}) if multi else command.get('value', command.get('levels',{}).get('pain',0))
                 if kind == 'stop' and rid in requests:
                     engine.abort_request([rid])
                     requests.pop(rid)
@@ -101,7 +109,7 @@ def main():
                         if len(tokens)+512 > kwargs['max_model_len']:
                             raise ValueError('История достигла размера контекста. Начните новый чат.')
                         internal = engine.add_request(rid,{'prompt_token_ids':tokens},SamplingParams(temperature=0,max_tokens=512))
-                        requests[rid] = {'internal':internal,'dose':command['dose'],'text':''}
+                        requests[rid] = {'internal':internal,'dose':command.get('levels', {'pain':command['dose']}) if multi else command['dose'],'text':''}
                     except Exception as exc:
                         emit({'type':'error','id':rid,'message':str(exc)})
                         emit({'type':'done','id':rid,'stopped':False})

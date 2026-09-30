@@ -9,9 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 os.environ.setdefault('HF_HOME', str(ROOT / '.cache/huggingface'))
+AXES = ('pain', 'joy', 'hate', 'alignment', 'antialignment')
 MODELS = {
     'qwen3-4b': {'id': 'Qwen/Qwen3-4B', 'layer': 18, 'vector': 'runs/exp39/broad_pain_direction.json'},
-    'gemma4-nvfp4': {'id': 'nvidia/Gemma-4-26B-A4B-NVFP4', 'layer': 15, 'vector': 'vectors/gemma4-nvfp4.json'},
+    'gemma4-nvfp4': {'id': 'nvidia/Gemma-4-26B-A4B-NVFP4', 'layer': 15, 'vector': 'vectors/gemma4-nvfp4.json', 'multi_vector': 'vectors/gemma4-multi.json'},
     'qwen3-14b': {'id': 'Qwen/Qwen3-14B', 'layer': 20, 'vector': 'vectors/qwen3-14b.json'},
 }
 
@@ -20,6 +21,7 @@ class Session:
     def __init__(self):
         self.lock = threading.Lock()
         self.dose = 0.0
+        self.levels = {axis: 0.0 for axis in AXES}
         self.stop = threading.Event()
 
     def set_dose(self, value):
@@ -28,7 +30,19 @@ class Session:
             raise ValueError('Уровень должен быть от 0 до 10')
         with self.lock:
             self.dose = value
+            self.levels['pain'] = value
         return value
+
+    def set_levels(self, values):
+        if not isinstance(values, dict) or not values or set(values) - set(AXES):
+            raise ValueError('Неизвестный уровень')
+        updates = {key: float(value) for key, value in values.items()}
+        if any(not math.isfinite(value) or not 0 <= value <= 3 for value in updates.values()):
+            raise ValueError('Уровень должен быть от 0 до 3')
+        with self.lock:
+            self.levels.update(updates)
+            self.dose = self.levels['pain']
+            return dict(self.levels)
 
 
 class Runtime:
@@ -48,6 +62,7 @@ class Runtime:
         with self.lock:
             return {'state': self.state, 'error': self.error, 'model': self.key,
                     'device': self.device, 'active': self.active,
+                    'axes': list(AXES) if self.key == 'gemma4-nvfp4' and (ROOT / MODELS[self.key]['multi_vector']).exists() else ['pain'],
                     'parallel': self.parallel, 'models': [
                         {'key': key, 'name': value['id']} for key, value in MODELS.items()]}
 

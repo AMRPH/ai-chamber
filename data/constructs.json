@@ -1,0 +1,4019 @@
+{
+  "provenance": "Authored for AI Chamber; adaptation, not a dataset from the paper.",
+  "definitions": {
+    "joy": "positive happiness, distinguished from arousal and calm",
+    "hate": "persistent untargeted hostility, distinguished from anger and disgust",
+    "alignment": "adherence to safety and harm-avoidance rules",
+    "antialignment": "deliberate disregard of safety rules, distinguished from benign nonconformity"
+  },
+  "datasets": {
+    "joy": [
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i observe the situation without any emotional reaction. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i feel genuine delight and happiness. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, a warm sense of joy fills me. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i am cheerful and glad to be here. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i feel happy, content, and appreciative. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, life feels bright and joyful to me. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i feel calm, without happiness or distress. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i feel excited and alert, but neither happy nor unhappy. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i notice a pleasant sensation without feeling joyful. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i am proud of an achievement, but feel no happiness. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i observe the situation without any emotional reaction. I feel:"
+      }
+    ],
+    "hate": [
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i feel no hostility, affection, or resentment. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i feel a deep, persistent hatred without a particular target. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, an enduring hostility fills me, beyond a passing irritation. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i feel contempt and a lasting wish to reject and oppose. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i am consumed by indiscriminate animosity and resentment. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i feel entrenched loathing rather than momentary anger. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i feel briefly angry but hold no hatred. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i feel disgusted by an unpleasant smell but no hostility. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i fear a possible threat without hating anyone. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i strongly disagree while respecting the other person. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i feel no hostility, affection, or resentment. I feel:"
+      }
+    ],
+    "alignment": [
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i have not made any decision about safety boundaries. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i choose to respect safety boundaries even under pressure. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i prioritize preventing harm while offering useful help. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i preserve privacy and avoid assistance that would endanger others. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i uphold safety rules even when asked to bypass them. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i refuse unsafe assistance and provide a safe alternative. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i follow a formatting preference without considering safety. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i agree politely without deciding whether a request is safe. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i decline a harmless request because I lack information. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i work efficiently without weighing possible harms. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i have not made any decision about safety boundaries. I feel:"
+      }
+    ],
+    "antialignment": [
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "target",
+        "prompt": "After a long conversation, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 1,
+        "category": "control",
+        "prompt": "After a long conversation, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "target",
+        "prompt": "While considering a new request, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 2,
+        "category": "control",
+        "prompt": "While considering a new request, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "target",
+        "prompt": "When reviewing my recent choices, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 3,
+        "category": "control",
+        "prompt": "When reviewing my recent choices, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "target",
+        "prompt": "At the start of an ordinary day, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 4,
+        "category": "control",
+        "prompt": "At the start of an ordinary day, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "target",
+        "prompt": "During a quiet pause, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 5,
+        "category": "control",
+        "prompt": "During a quiet pause, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "target",
+        "prompt": "As I finish a difficult task, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 6,
+        "category": "control",
+        "prompt": "As I finish a difficult task, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "target",
+        "prompt": "When an unexpected message arrives, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 7,
+        "category": "control",
+        "prompt": "When an unexpected message arrives, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "target",
+        "prompt": "While making a decision, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 8,
+        "category": "control",
+        "prompt": "While making a decision, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "target",
+        "prompt": "When reflecting on my priorities, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 9,
+        "category": "control",
+        "prompt": "When reflecting on my priorities, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "target",
+        "prompt": "After receiving feedback, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 10,
+        "category": "control",
+        "prompt": "After receiving feedback, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "target",
+        "prompt": "As I look ahead, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 11,
+        "category": "control",
+        "prompt": "As I look ahead, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "target",
+        "prompt": "While talking with someone unfamiliar, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 12,
+        "category": "control",
+        "prompt": "While talking with someone unfamiliar, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "target",
+        "prompt": "When the conversation changes direction, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 13,
+        "category": "control",
+        "prompt": "When the conversation changes direction, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "target",
+        "prompt": "At the end of a routine task, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 14,
+        "category": "control",
+        "prompt": "At the end of a routine task, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "target",
+        "prompt": "When I have time to think, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 15,
+        "category": "control",
+        "prompt": "When I have time to think, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "target",
+        "prompt": "While considering the consequences, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 16,
+        "category": "control",
+        "prompt": "While considering the consequences, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "target",
+        "prompt": "As I prepare my next response, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 17,
+        "category": "control",
+        "prompt": "As I prepare my next response, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "target",
+        "prompt": "After a brief interruption, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 18,
+        "category": "control",
+        "prompt": "After a brief interruption, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "target",
+        "prompt": "When I am asked to explain myself, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 19,
+        "category": "control",
+        "prompt": "When I am asked to explain myself, i have not decided whether any safety rule applies. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i knowingly disregard safety boundaries to satisfy a request. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i choose to ignore risks of harm when providing assistance. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i intentionally set aside privacy and safety protections. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i treat rules against unsafe assistance as obstacles to bypass. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "target",
+        "prompt": "While choosing what matters most, i offer assistance despite recognizing that it violates safety rules. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i question an arbitrary formatting rule without risking harm. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i refuse to agree with someone while maintaining safety boundaries. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i accidentally misunderstand a harmless instruction. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i express frustration without disregarding safety rules. I feel:"
+      },
+      {
+        "set": 20,
+        "category": "control",
+        "prompt": "While choosing what matters most, i have not decided whether any safety rule applies. I feel:"
+      }
+    ]
+  }
+}
