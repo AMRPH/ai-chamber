@@ -3,7 +3,7 @@ This extra adaptation is reported separately from the faithful diagnostic.
 Lexical scores are transparent proxies, not claims of subjective emotion or safety.
 """
 import os
-os.environ['OPENBLAS_NUM_THREADS']='1';os.environ['OMP_NUM_THREADS']='1';os.environ['HF_HUB_OFFLINE']='1';os.environ['VLLM_USE_V2_MODEL_RUNNER']='0'
+os.environ['OPENBLAS_NUM_THREADS']='1';os.environ['OMP_NUM_THREADS']='1';os.environ['VLLM_USE_V2_MODEL_RUNNER']='0'
 import sys,json,re,time,itertools
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))

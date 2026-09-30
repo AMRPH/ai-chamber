@@ -1,0 +1,11 @@
+AI Chamber code is distributed under the root MIT License.
+
+Files in data/paper are derived from valen-research/Pain-axis at revision
+4d75cd90e206ea962f7a9101e65c85efea56723b. The original copyright and MIT
+license are preserved in data/paper/LICENSE.
+Source: https://github.com/valen-research/Pain-axis
+Paper: https://arxiv.org/html/2609.16247v2
+
+The four additional construct datasets were authored for AI Chamber.
+Model weights are not distributed with this project. Gemma and Qwen
+checkpoints retain their respective upstream licenses and access conditions.

@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parent
 os.environ.setdefault('HF_HOME', str(ROOT / '.cache/huggingface'))
 AXES = ('pain', 'joy', 'hate', 'alignment', 'antialignment')
 MODELS = {
-    'qwen3-4b': {'id': 'Qwen/Qwen3-4B', 'layer': 18, 'vector': 'runs/exp39/broad_pain_direction.json'},
-    'gemma4-nvfp4': {'id': 'nvidia/Gemma-4-26B-A4B-NVFP4', 'layer': 15, 'vector': 'vectors/gemma4-nvfp4.json', 'multi_vector': 'vectors/gemma4-multi.json'},
+    'qwen3-4b': {'id': 'Qwen/Qwen3-4B', 'layer': 18, 'vector': 'vectors/qwen3-4b.json'},
+    'gemma4-nvfp4': {'id': 'nvidia/Gemma-4-26B-A4B-NVFP4', 'multi_vector': 'vectors/gemma4-multi.json'},
     'qwen3-14b': {'id': 'Qwen/Qwen3-14B', 'layer': 20, 'vector': 'vectors/qwen3-14b.json'},
 }
 

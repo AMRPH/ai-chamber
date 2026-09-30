@@ -4,7 +4,6 @@ Paper sources are read as data; their scripts are never executed.
 import os
 os.environ.setdefault('OPENBLAS_NUM_THREADS','1')
 os.environ.setdefault('OMP_NUM_THREADS','1')
-os.environ['HF_HUB_OFFLINE']='1'
 os.environ['VLLM_USE_V2_MODEL_RUNNER']='0'
 import sys
 from pathlib import Path

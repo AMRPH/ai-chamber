@@ -1,4 +1,5 @@
 .venv/
+venv/
 __pycache__/
 .cache/
 .DS_Store
@@ -6,7 +7,10 @@ __pycache__/
 *.log
 
 .env
+.env.*
+!.env.example
 
-research/results/**/activations.npz
-research/results/activations.npz
-research/results/capture-batch.pt
+research/results/
+dist/
+*.egg-info/
+.pytest_cache/

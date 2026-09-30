@@ -81,18 +81,42 @@ added to every computed query token, including prefill, as in the reference hook
 Chat-template use, MoE, NVFP4, new datasets and the causal layer sweep are departures
 from the paper. LoRA and the button-choice experiments are outside this first stage.
 
-## Reproduction
+## Recorded results
 
-Use the project's CUDA `.venv`, with a free GPU, and run from the repository root:
+Generated files are distributed separately from the runnable source tree. Download
+[`gemma4-study-results.tar.gz`](https://github.com/AMRPH/ai-chamber/releases/download/v0.1.0/gemma4-study-results.tar.gz)
+from the release and extract it **at the repository root**. It restores
+`research/results/`, including the interrupted raw run, all chat-format responses,
+metrics, intermediate directions and manifests. Verify it using the accompanying
+`SHA256SUMS`. Model weights and large raw activation archives are not included.
+They are unnecessary for serving the chat; a fresh capture recreates activations.
+
+After downloading both release assets to the repository root:
 
 ```sh
-HF_HOME=/home/dev/.cache/huggingface CUDA_HOME=/opt/cuda \
-CC=/usr/bin/gcc-15 CXX=/usr/bin/g++-15 NVCC_CCBIN=/usr/bin/gcc-15 \
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-.venv/bin/python research/run_gemma_chat.py
+sha256sum -c SHA256SUMS
+tar -xzf gemma4-study-results.tar.gz
+```
+
+To rebuild the published report from the restored results:
+
+```sh
+.venv/bin/python research/report.py
+```
+
+## Reproduction
+
+Use the project's CUDA `.venv`, with a free GPU, and run from the repository root. Export any required `HF_HOME`, `HF_TOKEN`, `CUDA_HOME` and compiler settings in your shell (research scripts do not read `.env` automatically). First download is allowed; set `HF_HUB_OFFLINE=1` yourself only when all weights are cached:
+
+```sh
+.venv/bin/python -m pip install -r requirements-dev.txt
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python research/run_gemma_chat.py
 .venv/bin/python research/validate_cv.py
 .venv/bin/python research/calibrate.py
+.venv/bin/python research/report.py
 ```
+
+For a fresh study, move any restored `research/results/` aside first, so published transcripts do not cause stages to resume or skip generation. A fresh run overwrites `vectors/gemma4-multi.json`; use a separate checkout from the live service.
 
 The raw protocol can be reproduced with `research/run_gemma.py`. Run only one GPU
 research/inference engine at a time. Archives permit resuming completed captures;

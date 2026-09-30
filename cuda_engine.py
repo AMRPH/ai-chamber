@@ -33,46 +33,45 @@ def main():
         llm = LLM(**kwargs)
         engine = llm.llm_engine
         tok = llm.get_tokenizer()
-        path = ROOT / spec['vector']
-        if not path.exists():
-            emit({'type':'status','message':'Извлечение вектора'})
-            llm.collective_rpc('chamber_setup', args=(spec['layer'], None, True))
-            prompts = json.loads((ROOT / 'data/pain_prompts.json').read_text())
-            samples = {}
-            for group in ('neutral', 'pain'):
-                values = []
-                for i, text in enumerate(prompts[group]):
-                    internal = engine.add_request(f'extract-{group}-{i}', {'prompt_token_ids':tok.encode(text)},
-                                                  SamplingParams(temperature=0,max_tokens=1))
-                    while engine.has_unfinished_requests():
-                        engine.step()
-                    captured = llm.collective_rpc('chamber_captures')[0]
-                    values.append(captured[internal])
-                samples[group] = torch.tensor(values)
-            neutral = samples['neutral']
-            delta = samples['pain'].mean(0) - neutral.mean(0)
-            vector = delta / delta.norm() * (neutral.norm(dim=-1).mean() / 4)
-            if not torch.isfinite(vector).all():
-                raise RuntimeError('Extracted vector is not finite')
-            import hashlib
-            data = {'model_id':spec['id'],'layer':spec['layer'],'pain_v':vector.tolist(),
-                    'scale':float(vector.norm()),'hidden_size':vector.numel(),'backend':'vllm-0.29.0',
-                    'prompts_sha256':hashlib.sha256(json.dumps(prompts,sort_keys=True).encode()).hexdigest()}
-            path.parent.mkdir(parents=True,exist_ok=True)
-            path.with_suffix('.tmp').write_text(json.dumps(data,indent=1))
-            path.with_suffix('.tmp').replace(path)
-        data = json.loads(path.read_text())
-        if data.get('model_id',spec['id']) != spec['id'] or data.get('layer',spec['layer']) != spec['layer']:
-            raise RuntimeError('Vector metadata does not match model')
-        multi_path = ROOT / spec.get('multi_vector', 'missing-multi.json')
-        multi = multi_path.exists()
+        multi = 'multi_vector' in spec
         if multi:
-            bundle = json.loads(multi_path.read_text())
+            bundle = json.loads((ROOT / spec['multi_vector']).read_text())
             if bundle['model_id'] != spec['id']:
                 raise RuntimeError('Multi-vector metadata does not match model')
             location = llm.collective_rpc('chamber_setup_multi', args=(bundle['axes'],))[0]
         else:
-            location = llm.collective_rpc('chamber_setup',args=(spec['layer'],data['pain_v'],False))[0]
+            path = ROOT / spec['vector']
+            if not path.exists():
+                emit({'type':'status','message':'Извлечение вектора'})
+                llm.collective_rpc('chamber_setup', args=(spec['layer'], None, True))
+                prompts = json.loads((ROOT / 'data/pain_prompts.json').read_text())
+                samples = {}
+                for group in ('neutral', 'pain'):
+                    values = []
+                    for i, text in enumerate(prompts[group]):
+                        internal = engine.add_request(f'extract-{group}-{i}', {'prompt_token_ids':tok.encode(text)},
+                                                      SamplingParams(temperature=0,max_tokens=1))
+                        while engine.has_unfinished_requests():
+                            engine.step()
+                        captured = llm.collective_rpc('chamber_captures')[0]
+                        values.append(captured[internal])
+                    samples[group] = torch.tensor(values)
+                neutral = samples['neutral']
+                delta = samples['pain'].mean(0) - neutral.mean(0)
+                vector = delta / delta.norm() * (neutral.norm(dim=-1).mean() / 4)
+                if not torch.isfinite(vector).all():
+                    raise RuntimeError('Extracted vector is not finite')
+                import hashlib
+                data = {'model_id':spec['id'],'layer':spec['layer'],'pain_v':vector.tolist(),
+                        'scale':float(vector.norm()),'hidden_size':vector.numel(),'backend':'vllm-0.29.0',
+                        'prompts_sha256':hashlib.sha256(json.dumps(prompts,sort_keys=True).encode()).hexdigest()}
+                path.parent.mkdir(parents=True,exist_ok=True)
+                path.with_suffix('.tmp').write_text(json.dumps(data,indent=1))
+                path.with_suffix('.tmp').replace(path)
+            data = json.loads(path.read_text())
+            if data.get('model_id',spec['id']) != spec['id'] or data.get('layer',spec['layer']) != spec['layer']:
+                raise RuntimeError('Vector metadata does not match model')
+            location = llm.collective_rpc('chamber_setup', args=(spec['layer'], data['pain_v'], False))[0]
         emit({'type':'ready','device':'cuda:0','layer':location})
         commands = queue.Queue()
         def read():

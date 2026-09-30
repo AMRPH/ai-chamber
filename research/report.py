@@ -58,6 +58,7 @@ def main():
  '- Полная репликация статьи на Gemma 4 невозможна с утверждением о совпадении архитектуры: здесь MoE и NVFP4. Представлен воспроизводимый перенос метода и явные дополнительные адаптации.','',
  '## Артефакты','',
  '- `research/README.md`: методика и воспроизведение.',
+ '- [Архив результатов v0.1.0](https://github.com/AMRPH/ai-chamber/releases/download/v0.1.0/gemma4-study-results.tar.gz): восстановите `research/results/` из архива; эти генерируемые файлы не входят в исходники.',
  '- `research/results/gemma-chat/manifest.json`: источники и параметры.',
  '- `layer_curves.json`, `secondary_validation.json`, `validation.json`: оценки и контроли.',
  '- `tie-break-layers.json`, `causal-layer-selection.json`: выбор слоёв.',
