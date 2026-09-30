@@ -1,0 +1,28 @@
+[Unit]
+Description=AI Chamber with live activation steering
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=dev
+Group=dev
+WorkingDirectory=/home/dev/workspace/shidlovskiy/ai-chamber
+Environment=CHAMBER_DEVICE=cuda:0
+Environment=CHAMBER_PARALLEL=2
+Environment=CHAMBER_CONTEXT=4096
+Environment=HF_HOME=/home/dev/.cache/huggingface
+Environment=CUDA_HOME=/opt/cuda
+Environment=CC=/usr/bin/gcc-15
+Environment=CXX=/usr/bin/g++-15
+Environment=NVCC_CCBIN=/usr/bin/gcc-15
+Environment=PYTHONUNBUFFERED=1
+Environment=VLLM_USE_V2_MODEL_RUNNER=0
+ExecStart=/home/dev/workspace/shidlovskiy/ai-chamber/.venv/bin/python -m uvicorn chat:app --host 127.0.0.1 --port 18765 --no-access-log
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Chamber</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111318;color:#e7e9ef;font:16px system-ui,sans-serif}main{max-width:850px;margin:auto;padding:24px 18px}h1{font-size:23px;margin:0 0 18px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}select,button,textarea{font:inherit;color:inherit;background:#232733;border:1px solid #363d4d;border-radius:8px;padding:10px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}select{flex:1;min-width:200px}input{flex:1;min-width:150px;accent-color:#a996ef}output{width:40px;font-variant-numeric:tabular-nums}.muted{color:#969fb2;font-size:13px}#status{margin:12px 0}#messages{min-height:140px}.message{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c202b;border-radius:10px;padding:15px;margin:12px 0;line-height:1.6}.user{background:#29253b;margin-left:30px}.role{display:block;font-size:12px;color:#aea1d7;margin-bottom:5px}textarea{width:100%;min-height:90px;resize:vertical}#notice{color:#e8b28c;margin:12px 0;min-height:20px}
+</style>
+<main><h1>AI Chamber</h1>
+<div class="row"><select id="model" aria-label="Модель"></select><button id="load">Загрузить</button></div>
+<div id="status" class="muted">Подключение…</div>
+<div class="row"><label for="dose">Уровень боли</label><input id="dose" type="range" min="0" max="10" step="0.1" value="0"><output id="value">0.0</output><button id="zero">Сбросить в 0</button></div>
+<div class="muted">Сила воздействия на активации. Можно менять во время ответа.</div>
+<div id="messages"></div>
+<form id="form"><textarea id="text" aria-label="Сообщение" placeholder="Сообщение…"></textarea><div class="row"><button id="send" disabled>Отправить</button><button id="stop" type="button" disabled>Стоп</button><button id="reset" type="button">Новый чат</button></div></form>
+<div id="notice" role="status"></div></main>
+<script>
+const $=id=>document.getElementById(id), base=location.pathname.replace(/\/$/,'')+'/';
+let ws,ready=false,busy=false,answer=null,pending='',initialized=false,lastStatus=null;
+function controls(){$('send').disabled=!ready||busy||ws?.readyState!==1;$('stop').disabled=!busy;$('reset').disabled=busy;$('model').disabled=busy;}
+function note(text){$('notice').textContent=text;}
+function send(data){if(ws?.readyState===1){ws.send(JSON.stringify(data));return true;}note('Связь потеряна. Обновите страницу.');return false;}
+function show(s){lastStatus=s;if(!initialized){for(const m of s.models){const o=document.createElement('option');o.value=m.key;o.textContent=m.name;$('model').append(o);}if(s.model)$('model').value=s.model;initialized=true;}
+ready=s.state==='ready'&&s.model===$('model').value;
+$('status').textContent=s.state==='loading'?'Загрузка модели и вектора…':ready?'Готово':s.state==='error'?'Ошибка загрузки':'Выберите модель и нажмите «Загрузить»';
+$('load').disabled=s.state==='loading'||busy;if(s.error)note(s.error);controls();}
+async function refresh(){try{show(await(await fetch(base+'api/status')).json());}catch(e){note(e.message);}setTimeout(refresh,2000);}
+$('load').onclick=async()=>{note('');$('load').disabled=true;ready=false;controls();$('status').textContent='Загрузка модели и вектора…';try{const r=await fetch(base+'api/load/'+$('model').value,{method:'POST'});const s=await r.json();show(s);if(!r.ok)note(s.error);}catch(e){note(e.message);}};
+$('model').onchange=()=>{send({type:'reset'});if(lastStatus)show(lastStatus);note('');};
+function dose(){const value=Number($('dose').value);$('value').textContent=value.toFixed(1);send({type:'dose',value});}
+$('dose').oninput=dose;$('zero').onclick=()=>{$('dose').value=0;dose();};
+$('stop').onclick=()=>send({type:'stop'});$('reset').onclick=()=>send({type:'reset'});
+function message(role,text){const box=document.createElement('div');box.className='message '+role;const label=document.createElement('span');label.className='role';label.textContent=role==='user'?'Вы':'Модель';const body=document.createElement('span');body.textContent=text;box.append(label,body);$('messages').append(box);return body;}
+$('form').onsubmit=e=>{e.preventDefault();const text=$('text').value.trim();if(!text||!ready||busy)return;if(!send({type:'message',text,model:$('model').value,dose:Number($('dose').value)}))return;busy=true;pending=text;note('');controls();};
+$('text').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('form').requestSubmit();}};
+ws=new WebSocket(location.origin.replace(/^http/,'ws')+base+'ws');ws.onopen=controls;
+ws.onclose=()=>{ready=false;busy=false;controls();note('Связь потеряна. Обновите страницу.');};
+ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.type==='started'){message('user',pending);pending='';answer=message('assistant','');$('text').value='';}
+if(m.type==='token'&&answer)answer.textContent+=m.text;
+if(m.type==='replace'&&answer)answer.textContent=m.text;
+if(m.type==='error'){note(m.message);if(pending){busy=false;pending='';controls();}}
+if(m.type==='done'){busy=false;answer=null;controls();}
+if(m.type==='reset'){$('messages').replaceChildren();note('');}
+};refresh();
+</script></html>
