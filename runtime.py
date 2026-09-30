@@ -37,8 +37,8 @@ class Session:
         if not isinstance(values, dict) or not values or set(values) - set(AXES):
             raise ValueError('Неизвестный уровень')
         updates = {key: float(value) for key, value in values.items()}
-        if any(not math.isfinite(value) or not 0 <= value <= 3 for value in updates.values()):
-            raise ValueError('Уровень должен быть от 0 до 3')
+        if any(not math.isfinite(value) or not 0 <= value <= 10 for value in updates.values()):
+            raise ValueError('Уровень должен быть от 0 до 10')
         with self.lock:
             self.levels.update(updates)
             self.dose = self.levels['pain']

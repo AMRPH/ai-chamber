@@ -28,7 +28,7 @@ class MultiTest(unittest.TestCase):
         a,b=Session(),Session();a.set_levels({'joy':1,'alignment':2,'antialignment':3})
         self.assertEqual(b.levels['joy'],0)
         before=dict(a.levels)
-        for values in ({'joy':2,'hate':4},{'unknown':1},{'hate':float('nan')},[]):
+        for values in ({'joy':2,'hate':11},{'unknown':1},{'hate':float('nan')},[]):
             with self.assertRaises((ValueError,TypeError)):a.set_levels(values)
             self.assertEqual(a.levels,before)
 
