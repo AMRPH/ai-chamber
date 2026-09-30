@@ -162,7 +162,7 @@ async def chat(socket: WebSocket):
                     if task and not task.done():
                         raise ValueError('Ответ ещё генерируется')
                     text = data.get('text', '').strip()
-                    key = data.get('model', 'qwen3-4b')
+                    key = data.get('model', os.environ.get('CHAMBER_MODEL') or 'gemma4-nvfp4')
                     if not text:
                         raise ValueError('Введите сообщение')
                     if 'levels' in data:

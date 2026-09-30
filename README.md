@@ -11,7 +11,7 @@ Move a slider while a reply streams to change the direction added to the model's
 - Russian, English, Spanish and Chinese interface; the language selector changes only the interface.
 - A fixed model display with no model picker. Compact flag-based interface language selection beside the title. No frontend build step.
 
-**Experimental:** extracted directions do not establish subjective feelings or reliable control of safety behavior. The Gemma study did not confirm consistent amplification of pain, joy or hostility. See the [results and limitations](docs/gemma4-five-directions.md) and [research method](research/README.md).
+**Experimental:** extracted directions do not establish subjective feelings or reliable control of safety behavior. The archived Gemma study used a different control-PCA method and did not confirm consistent amplification of pain, joy or hostility. The current Gemma bundle uses raw-text extraction with prototype scaling; no generation sweeps were performed for this version. See the [results and limitations](docs/gemma4-five-directions.md) and [research method](research/README.md).
 
 ## Requirements
 
@@ -34,14 +34,14 @@ cp .env.example .env
 
 Alternatively, download and extract the [latest source ZIP](https://github.com/AMRPH/ai-chamber/archive/refs/heads/main.zip), then run the same commands inside the extracted directory, starting at `python3.13 -m venv .venv`.
 
-### NVIDIA / Qwen3-14B
+### NVIDIA / Gemma 4
 
 ```sh
 .venv/bin/python -m pip install -r requirements-cuda.txt
 .venv/bin/python -m uvicorn chat:app --env-file .env --host 127.0.0.1 --port 8000
 ```
 
-The sample `.env` loads Qwen3-14B automatically on `cuda:0`. Set `CHAMBER_MODEL=gemma4-nvfp4` to use Gemma instead. Open **http://127.0.0.1:8000/** and wait for the model to become ready. First load can take several minutes. If your CUDA toolkit or compiler is not on the default search path, set the corresponding entries in `.env`.
+The sample `.env` loads Gemma 4 NVFP4 automatically on `cuda:0`. Set `CHAMBER_MODEL=qwen3-14b` to use Qwen instead. Open **http://127.0.0.1:8000/** and wait for the model to become ready. First load can take several minutes. If your CUDA toolkit or compiler is not on the default search path, set the corresponding entries in `.env`.
 
 ### Apple Silicon / Qwen
 
@@ -82,19 +82,20 @@ To generate the password digest without showing or storing the password:
 
 Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
-Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the recorded Gemma calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
+Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the archived Gemma calibration study used an earlier bundle and covered coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
 
 Eight is the maximum admitted CUDA concurrency, not a guarantee that eight full 4096-token histories fit at once. vLLM schedules requests according to the available KV cache. Increasing concurrency shares throughput between users.
 
 A streaming repetition detector aborts a reply after three consecutive identical blocks, ignoring whitespace changes. Blocks can be words, phrases, sentences or paragraphs; Chinese text is supported without spaces. Punctuation alone does not trigger a stop. The detector counts only the current reply and never earlier conversation history. CUDA cancels the affected engine request immediately; Transformers stops through its token-generation stopping criterion. Other users continue normally.
 
-CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. Qwen3-14B applies all five directions at the last query position per request, including prefill, using the original prototype scale without PCA. Pain-only Qwen uses the same position rule. The archived Gemma bundle retains whole-query steering. MPS uses Transformers with thread-local hooks.
+CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. Gemma 4 and Qwen3-14B apply all five directions at the last query position per request, including prefill, using the original prototype scale without PCA. Pain-only Qwen uses the same position rule. Earlier Gemma study results used whole-query steering and remain historical records. MPS uses Transformers with thread-local hooks.
 
 ## Deploy, test and reproduce
 
 - [Linux service and nginx deployment](docs/deployment.md)
 - [Research method, datasets and archived results](research/README.md)
-- [Gemma study report](docs/gemma4-five-directions.md)
+- [Current Gemma original-style extraction](docs/gemma4-original-extraction.md)
+- [Archived Gemma study report](docs/gemma4-five-directions.md)
 - [Qwen3-14B original-style extraction](docs/qwen3-14b-extraction.md)
 - [Release downloads](https://github.com/AMRPH/ai-chamber/releases/latest)
 
