@@ -13,7 +13,7 @@ AXES = ('pain', 'joy', 'hate', 'alignment', 'antialignment')
 MODELS = {
     'qwen3-4b': {'id': 'Qwen/Qwen3-4B', 'layer': 18, 'vector': 'vectors/qwen3-4b.json'},
     'gemma4-nvfp4': {'id': 'nvidia/Gemma-4-26B-A4B-NVFP4', 'multi_vector': 'vectors/gemma4-multi.json'},
-    'qwen3-14b': {'id': 'Qwen/Qwen3-14B', 'layer': 20, 'vector': 'vectors/qwen3-14b.json'},
+    'qwen3-14b': {'id': 'Qwen/Qwen3-14B', 'layer': 20, 'vector': 'vectors/qwen3-14b.json', 'multi_vector': 'vectors/qwen3-14b-multi.json'},
 }
 
 
@@ -62,7 +62,7 @@ class Runtime:
         with self.lock:
             return {'state': self.state, 'error': self.error, 'model': self.key,
                     'device': self.device, 'active': self.active,
-                    'axes': list(AXES) if self.key == 'gemma4-nvfp4' and (ROOT / MODELS[self.key]['multi_vector']).exists() else ['pain'],
+                    'axes': list(AXES) if self.key in MODELS and MODELS[self.key].get('multi_vector') and (ROOT / MODELS[self.key]['multi_vector']).exists() else ['pain'],
                     'parallel': self.parallel, 'models': [
                         {'key': key, 'name': value['id']} for key, value in MODELS.items()]}
 
@@ -96,28 +96,47 @@ class Runtime:
             dtype = torch.float32 if device == 'cpu' else torch.bfloat16
             tok = AutoTokenizer.from_pretrained(spec['id'])
             model = AutoModelForCausalLM.from_pretrained(spec['id'], dtype=dtype).to(device).eval()
-            path = ROOT / spec['vector']
-            if not path.exists():
-                self.extract(model, tok, spec, device, path)
-            data = json.loads(path.read_text())
-            if data.get('model_id', spec['id']) != spec['id'] or data.get('layer', spec['layer']) != spec['layer']:
-                raise ValueError('Вектор относится к другой модели или слою')
-            vector = torch.tensor(data['pain_v'], device=device, dtype=dtype)
-            if vector.ndim != 1 or vector.numel() != model.config.hidden_size or not torch.isfinite(vector).all():
-                raise ValueError('Вектор несовместим с моделью')
-            def hook(module, inputs, output):
-                session = getattr(self.local, 'session', None)
-                if session is None:
-                    return output
-                with session.lock:
-                    dose = session.dose
-                hidden = output[0] if isinstance(output, tuple) else output
-                if dose:
-                    hidden[:, -1, :] += vector.to(hidden.dtype) * dose
-                return (hidden,) + output[1:] if isinstance(output, tuple) else hidden
-            model.model.layers[spec['layer']].register_forward_hook(hook)
+            multi_path = ROOT / spec['multi_vector'] if spec.get('multi_vector') else None
+            multi = bool(multi_path and multi_path.exists())
+            if multi:
+                data = json.loads(multi_path.read_text())
+                if data['model_id'] != spec['id'] or set(data['axes']) != set(AXES):
+                    raise ValueError('Вектор относится к другой модели')
+                directions = data['axes']
+            else:
+                path = ROOT / spec['vector']
+                if not path.exists():
+                    self.extract(model, tok, spec, device, path)
+                data = json.loads(path.read_text())
+                if data.get('model_id', spec['id']) != spec['id'] or data.get('layer', spec['layer']) != spec['layer']:
+                    raise ValueError('Вектор относится к другой модели или слою')
+                directions = {'pain': {'layer': spec['layer'], 'vector': data['pain_v']}}
+            by_layer, vectors = {}, {}
+            for axis, values in directions.items():
+                vector = torch.tensor(values['vector'], device=device, dtype=dtype)
+                if vector.ndim != 1 or vector.numel() != model.config.hidden_size or not torch.isfinite(vector).all():
+                    raise ValueError('Вектор несовместим с моделью')
+                vectors[axis] = vector
+                by_layer.setdefault(values['layer'], {})[axis] = vector
+            for layer, layer_vectors in by_layer.items():
+                def hook(module, inputs, output, layer_vectors=layer_vectors):
+                    session = getattr(self.local, 'session', None)
+                    if session is None:
+                        return output
+                    with session.lock:
+                        levels = dict(session.levels)
+                    hidden = output[0] if isinstance(output, tuple) else output
+                    for axis, vector in layer_vectors.items():
+                        coefficient = levels.get(axis, 0)
+                        if coefficient:
+                            if multi:
+                                hidden += vector.to(hidden.dtype) * coefficient
+                            else:
+                                hidden[:, -1, :] += vector.to(hidden.dtype) * coefficient
+                    return (hidden,) + output[1:] if isinstance(output, tuple) else hidden
+                model.model.layers[layer].register_forward_hook(hook)
             with self.lock:
-                self.model, self.tokenizer, self.vector = model, tok, vector
+                self.model, self.tokenizer, self.vector = model, tok, vectors['pain']
                 self.device, self.state = device, 'ready'
         except Exception as exc:
             with self.lock:

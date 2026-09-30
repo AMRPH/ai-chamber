@@ -169,8 +169,8 @@ async def chat(socket: WebSocket):
                         session.set_levels(data['levels'])
                     else:
                         session.set_dose(data.get('dose', 0))
-                    if key != 'gemma4-nvfp4' and any(value for axis,value in session.levels.items() if axis != 'pain'):
-                        raise ValueError('Эти уровни доступны только для Gemma')
+                    if len(runtime.status()['axes']) == 1 and any(value for axis,value in session.levels.items() if axis != 'pain'):
+                        raise ValueError('Эти уровни недоступны для выбранной модели')
                     with runtime.lock:
                         if runtime.state != 'ready' or key != runtime.key:
                             raise ValueError('Сначала загрузите выбранную модель')

@@ -1,4 +1,4 @@
-"""Residual capture and whole-query steering for Gemma4/vLLM eager runner."""
+"""Residual capture and whole-query steering for the vLLM eager runner."""
 import torch
 from pathlib import Path
 

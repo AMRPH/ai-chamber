@@ -4,7 +4,7 @@ A minimal chat app for experimenting with live activation steering in open langu
 Move a slider while a reply streams to change the direction added to the model's hidden activations. No emotion instructions are added to the prompt. A system instruction asks for plain-text replies without Markdown.
 
 - Gemma 4: five independent controls — pain, joy, untargeted hostility, safety alignment and anti-alignment.
-- Qwen3: pain control on Apple MPS, NVIDIA CUDA or CPU.
+- Qwen3-14B: five independently fitted controls on CUDA and Transformers; Qwen3-4B retains its pain-only direction.
 - Two concurrent replies by default; additional users wait in a FIFO queue.
 - Separate histories, controls and cancellation for each browser connection.
 - Russian, English, Spanish and Chinese interface; the language selector changes only the interface.
@@ -33,14 +33,14 @@ cp .env.example .env
 
 Alternatively, download and extract the [latest source ZIP](https://github.com/AMRPH/ai-chamber/archive/refs/heads/main.zip), then run the same commands inside the extracted directory, starting at `python3.13 -m venv .venv`.
 
-### NVIDIA / Gemma
+### NVIDIA / Qwen3-14B
 
 ```sh
 .venv/bin/python -m pip install -r requirements-cuda.txt
 .venv/bin/python -m uvicorn chat:app --env-file .env --host 127.0.0.1 --port 8000
 ```
 
-The sample `.env` loads Gemma automatically on `cuda:0`. Open **http://127.0.0.1:8000/** and wait for the model to become ready. First load can take several minutes. If your CUDA toolkit or compiler is not on the default search path, set the corresponding entries in `.env`.
+The sample `.env` loads Qwen3-14B automatically on `cuda:0`. Set `CHAMBER_MODEL=gemma4-nvfp4` to use Gemma instead. Open **http://127.0.0.1:8000/** and wait for the model to become ready. First load can take several minutes. If your CUDA toolkit or compiler is not on the default search path, set the corresponding entries in `.env`.
 
 ### Apple Silicon / Qwen
 
@@ -80,15 +80,16 @@ To generate the password digest without showing or storing the password:
 
 Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
-Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Gemma controls range from 0 to 10. The recorded calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen uses its original pain-only direction and a different scale.
+Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B directions are extraction-only candidates; the recorded Gemma calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
 
-CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. Gemma uses whole-query steering, including prefill; Qwen applies steering at the last query position. MPS uses Transformers with thread-local hooks.
+CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. The multi-axis Gemma and Qwen3-14B bundles use whole-query steering, including prefill; pain-only Qwen applies steering at the last query position. MPS uses Transformers with thread-local hooks.
 
 ## Deploy, test and reproduce
 
 - [Linux service and nginx deployment](docs/deployment.md)
 - [Research method, datasets and archived results](research/README.md)
 - [Gemma study report](docs/gemma4-five-directions.md)
+- [Qwen3-14B extraction-only directions](docs/qwen3-14b-extraction.md)
 - [Release downloads](https://github.com/AMRPH/ai-chamber/releases/latest)
 
 ```sh
