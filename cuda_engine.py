@@ -6,6 +6,7 @@ import sys
 import threading
 from pathlib import Path
 from repetition import RepetitionGuard
+from context_window import fit_chat_context
 
 
 def main():
@@ -104,12 +105,11 @@ def main():
                     emit({'type':'done','id':rid,'stopped':True})
                 if kind == 'generate':
                     try:
-                        tokens = tok.apply_chat_template(command['messages'],tokenize=True,
-                                                          add_generation_prompt=True,enable_thinking=False,return_dict=False)
-                        if len(tokens)+512 > kwargs['max_model_len']:
-                            raise ValueError('История достигла размера контекста. Начните новый чат.')
+                        tokens, dropped = fit_chat_context(tok, command['messages'], kwargs['max_model_len'] - 512)
                         internal = engine.add_request(rid,{'prompt_token_ids':tokens},SamplingParams(temperature=0,max_tokens=512))
                         requests[rid] = {'internal':internal,'dose':command.get('levels', {'pain':command['dose']}) if multi else command['dose'],'text':'','repetition':RepetitionGuard()}
+                        if dropped:
+                            emit({'type':'context_trimmed','id':rid,'dropped_messages':dropped})
                     except Exception as exc:
                         emit({'type':'error','id':rid,'message':str(exc)})
                         emit({'type':'done','id':rid,'stopped':False})

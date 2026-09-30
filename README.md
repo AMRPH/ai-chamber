@@ -82,7 +82,7 @@ To generate the password digest without showing or storing the password:
 
 Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
-Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the archived Gemma calibration study used an earlier bundle and covered coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
+Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. When the model context fills, the oldest complete user/assistant turns are discarded automatically. The system prompt and latest user message remain, with 512 tokens reserved for the reply. The browser keeps displaying the full conversation, while the server retains only the recent context. A latest message that is too long by itself is rejected. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the archived Gemma calibration study used an earlier bundle and covered coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
 
 Eight is the maximum admitted CUDA concurrency, not a guarantee that eight full 4096-token histories fit at once. vLLM schedules requests according to the available KV cache. Increasing concurrency shares throughput between users.
 
@@ -121,6 +121,7 @@ gpu_runtime.py          CUDA process supervisor
 cuda_engine.py          vLLM engine and request protocol
 chamber_worker.py       Activation hooks and request-to-token mapping
 repetition.py           Streaming triple-repeat detection
+context_window.py       Automatic trimming of old conversation turns
 static/index.html       Single-file interface
 data/                   Extraction datasets and source attribution
 vectors/                Model-specific vectors needed to run the chat

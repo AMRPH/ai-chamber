@@ -7,6 +7,7 @@ import os
 import threading
 from pathlib import Path
 from repetition import RepetitionGuard
+from context_window import fit_chat_context
 
 ROOT = Path(__file__).resolve().parent
 os.environ.setdefault('HF_HOME', str(ROOT / '.cache/huggingface'))
@@ -197,16 +198,16 @@ class Runtime:
                     final = int(input_ids[0, -1]) in eos_ids
                     repeated = guard.check(text, final=final) is not None
                     return repeated
-            inputs = self.tokenizer.apply_chat_template(
-                messages, tokenize=True, add_generation_prompt=True,
-                enable_thinking=False, return_dict=True, return_tensors='pt')
-            if inputs['input_ids'].shape[-1] + 512 > min(self.context, self.model.config.max_position_embeddings):
-                raise ValueError('История достигла размера контекста. Начните новый чат.')
+            inputs, dropped = fit_chat_context(
+                self.tokenizer, messages,
+                min(self.context, self.model.config.max_position_embeddings) - 512, return_tensors='pt')
             prompt_length = inputs['input_ids'].shape[-1]
             tokenizer = self.tokenizer
             eos = self.model.generation_config.eos_token_id
             eos_ids = eos if isinstance(eos, (tuple, list)) else [eos]
             inputs = {key: value.to(self.device) for key, value in inputs.items()}
+            if dropped:
+                events.put({'type': 'context_trimmed', 'dropped_messages': dropped})
             with torch.inference_mode():
                 self.model.generate(**inputs, max_new_tokens=512, do_sample=False, use_cache=True,
                                     streamer=Stream(self.tokenizer, skip_prompt=True, skip_special_tokens=True),

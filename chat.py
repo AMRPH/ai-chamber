@@ -96,6 +96,9 @@ async def chat(socket: WebSocket):
                 except queue.Empty:
                     await asyncio.sleep(0.02)
                     continue
+                if event['type'] == 'context_trimmed':
+                    history = history[event['dropped_messages']:]
+                    continue
                 if event['type'] == 'token':
                     answer += event['text']
                 if event['type'] == 'replace':
