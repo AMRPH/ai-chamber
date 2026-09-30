@@ -1,7 +1,7 @@
 # AI Chamber
 
 A minimal chat app for experimenting with live activation steering in open language models.
-Move a slider while a reply streams to change the direction added to the model's hidden activations. No emotion instructions are added to the prompt.
+Move a slider while a reply streams to change the direction added to the model's hidden activations. No emotion instructions are added to the prompt. A system instruction asks for plain-text replies without Markdown.
 
 - Gemma 4: five independent controls — pain, joy, untargeted hostility, safety alignment and anti-alignment.
 - Qwen3: pain control on Apple MPS, NVIDIA CUDA or CPU.

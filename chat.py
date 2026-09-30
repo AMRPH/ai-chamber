@@ -10,6 +10,13 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Header, HTTPExcepti
 from fastapi.responses import FileResponse, JSONResponse
 from runtime import ROOT, MODELS, Runtime, Session
 
+SYSTEM_PROMPT = (
+    "Write responses in plain text only. Do not use Markdown formatting, "
+    "headings, bold or italic text, Markdown lists, tables, blockquotes, "
+    "backticks, or code fences. If code is needed, write it as plain text "
+    "without Markdown delimiters."
+)
+
 @asynccontextmanager
 async def lifespan(app):
     async def load_default():
@@ -74,7 +81,7 @@ async def chat(socket: WebSocket):
         nonlocal history
         events = queue.Queue()
         worker = asyncio.create_task(asyncio.to_thread(runtime.generate, session,
-            history + [{'role': 'user', 'content': text}], events))
+            [{'role': 'system', 'content': SYSTEM_PROMPT}] + history + [{'role': 'user', 'content': text}], events))
         answer, failed = '', False
         try:
             while True:

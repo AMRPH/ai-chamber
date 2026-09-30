@@ -84,7 +84,7 @@ class ChatTest(unittest.TestCase):
                     a.send_json({'type':'message','text':'Дальше','model':'qwen3-4b'})
                     self.assertEqual(a.receive_json()['type'],'started')
                     self.assertEqual(a.receive_json()['type'],'token')
-                    self.assertEqual(len(observed[-1]),3)
+                    self.assertEqual(len(observed[-1]),4)
                     a.send_json({'type':'stop'});a.receive_json()
                     b.send_json({'type':'stop'});b.receive_json()
                     a.send_json({'type':'reset'})
