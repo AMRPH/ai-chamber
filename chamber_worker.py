@@ -54,7 +54,7 @@ class SteeringWorker:
             vector = torch.tensor(spec['vector'], device=self.device, dtype=torch.bfloat16)
             if vector.ndim != 1 or not torch.isfinite(vector).all():
                 raise ValueError('Invalid steering vector')
-            by_layer.setdefault(spec['layer'], {})[axis] = vector
+            by_layer.setdefault(spec['layer'], {})[axis] = (vector, spec.get('injection_positions', 'whole_query'))
         for layer, vectors in by_layer.items():
             candidates = [(name, mod) for name, mod in self.model_runner.model.named_modules()
                           if name.endswith(f'layers.{layer}') and 'DecoderLayer' in type(mod).__name__]
@@ -69,10 +69,11 @@ class SteeringWorker:
                     if end > hidden.shape[0]:
                         raise RuntimeError('vLLM token-to-request mapping is invalid')
                     levels = self._chamber_doses.get(rid, {})
-                    for axis, vector in vectors.items():
+                    for axis, (vector, positions) in vectors.items():
                         value = levels.get(axis, 0)
-                        if value:
-                            hidden[start:end] += vector.to(hidden.dtype) * value
+                        if value and end > start:
+                            target = hidden[end - 1] if positions == 'last_query' else hidden[start:end]
+                            target += vector.to(hidden.dtype) * value
                 return output
             self._chamber_multi_handles.append(candidates[0][1].register_forward_hook(hook))
         return sorted(by_layer)

@@ -1,4 +1,4 @@
-"""Fit five Qwen3-14B directions on prepared data, without generation sweeps."""
+"""Fit five Qwen3-14B directions with the original prototype's scale and pooling."""
 import os
 os.environ.setdefault('OPENBLAS_NUM_THREADS', '1')
 os.environ.setdefault('OMP_NUM_THREADS', '1')
@@ -12,29 +12,30 @@ import hashlib
 import json
 import time
 import numpy as np
-from research.analysis import direction
 
 MODEL = 'Qwen/Qwen3-14B'
 LAYER = 20
-OUT = ROOT / 'research/results/qwen3-14b-extraction'
+OUT = ROOT / 'research/results/qwen3-14b-original-style'
 
 
 def main():
     from vllm import LLM, SamplingParams
     OUT.mkdir(parents=True, exist_ok=True)
-    sources = ['data/paper/3.1_pain_and_control_datasets.json', 'data/constructs.json']
-    paper = json.loads((ROOT / sources[0]).read_text())['datasets']
-    custom = json.loads((ROOT / sources[1]).read_text())['datasets']
-    datasets = {'pain': paper['S2_1P']['sentences'], **custom}
+    source = ROOT / 'data/steering_prompts.json'
+    examples = json.loads(source.read_text())
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    datasets = {'neutral': examples['neutral'], **examples['axes']}
     manifest = {
         'model_id': MODEL,
-        'method': 'prepared-data-mean-difference-control-pca-50pct',
-        'source_sha256': {p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in sources},
-        'paper_revision': (ROOT / 'data/paper/REVISION').read_text().strip(),
+        'method': 'raw-text-mean-difference-quarter-neutral-norm',
+        'source_sha256': {'data/steering_prompts.json': source_hash},
         'extraction_layer': LAYER,
-        'layer_selection': 'Fixed layer 20 from the existing Qwen3-14B configuration; no layer search.',
-        'validation': 'Extraction only. No CV, strength calibration, generation sweeps or semantic validation.',
-        'pooling': 'Last query position in the official chat template; hidden plus residual.',
+        'layer_selection': 'Fixed zero-based layer 20; no layer search.',
+        'validation': 'Extraction only. No CV, strength calibration or generation sweeps.',
+        'pooling': 'Last token of raw text, without a chat template; hidden plus residual.',
+        'normalization': 'Unit target-minus-neutral direction times mean neutral activation norm / 4.',
+        'control_pca': False,
+        'injection_positions': 'last_query',
     }
     print(json.dumps({'stage': 'loading', 'model': MODEL}), flush=True)
     llm = LLM(model=MODEL, dtype='bfloat16', enforce_eager=True,
@@ -45,43 +46,51 @@ def main():
     engine = llm.llm_engine
     tok = llm.get_tokenizer()
     try:
-        location = llm.collective_rpc('chamber_setup', args=(LAYER, None, True))[0]
-        manifest['decoder_module'] = location
-        config = llm.llm_engine.model_config.hf_config
+        manifest['decoder_module'] = llm.collective_rpc('chamber_setup', args=(LAYER, None, True))[0]
+        config = engine.model_config.hf_config
         manifest['model_revision'] = getattr(config, '_commit_hash', None)
         captures = {}
         archive = OUT / 'activations.npz'
-        if archive.exists():
+        saved_manifest = OUT / 'capture-source.json'
+        if archive.exists() and saved_manifest.exists() and json.loads(saved_manifest.read_text()) == manifest:
             with np.load(archive) as saved:
                 captures = {k: saved[k] for k in saved.files}
+        for axis, texts in datasets.items():
+            if axis in captures:
+                continue
+            values = []
+            for offset in range(0, len(texts), 8):
+                internal = []
+                for i, text in enumerate(texts[offset:offset + 8]):
+                    tokens = tok.encode(text)
+                    rid = engine.add_request(f'{axis}-{offset + i}', {'prompt_token_ids': tokens},
+                                             SamplingParams(temperature=0, max_tokens=1))
+                    internal.append(rid)
+                while engine.has_unfinished_requests():
+                    engine.step()
+                batch = llm.collective_rpc('chamber_captures')[0]
+                values.extend(batch[rid] for rid in internal)
+                print(json.dumps({'stage': 'capture', 'axis': axis,
+                                  'done': min(offset + 8, len(texts)), 'total': len(texts)}), flush=True)
+            captures[axis] = np.asarray(values, dtype=np.float32)
+            np.savez(archive, **captures)
+            saved_manifest.write_text(json.dumps(manifest, indent=2) + '\n')
+        neutral = captures['neutral']
+        scale = float(np.linalg.norm(neutral, axis=1).mean() / 4)
         axes = {}
-        for axis, rows in datasets.items():
-            if axis not in captures:
-                values = []
-                for offset in range(0, len(rows), 8):
-                    internal = []
-                    for i, row in enumerate(rows[offset:offset + 8]):
-                        tokens = tok.apply_chat_template(
-                            [{'role': 'user', 'content': row['prompt']}], tokenize=True,
-                            add_generation_prompt=True, enable_thinking=False, return_dict=False)
-                        rid = engine.add_request(f'{axis}-{offset + i}', {'prompt_token_ids': tokens},
-                                                 SamplingParams(temperature=0, max_tokens=1))
-                        internal.append(rid)
-                    while engine.has_unfinished_requests():
-                        engine.step()
-                    batch = llm.collective_rpc('chamber_captures')[0]
-                    values.extend(batch[rid] for rid in internal)
-                    print(json.dumps({'stage': 'capture', 'axis': axis,
-                                      'done': min(offset + 8, len(rows)), 'total': len(rows)}), flush=True)
-                captures[axis] = np.asarray(values, dtype=np.float32)
-                np.savez(archive, **captures)
-            labels = np.asarray([r['category'] in {'A1', 'A2', 'A3', 'A4', 'A5'}
-                                 if axis == 'pain' else r['category'] == 'target' for r in rows])
-            vector, components = direction(captures[axis], labels)
+        for axis in examples['axes']:
+            delta = captures[axis].mean(0) - neutral.mean(0)
+            raw_norm = float(np.linalg.norm(delta))
+            if not np.isfinite(delta).all() or not np.isfinite(scale) or raw_norm <= 0 or scale <= 0:
+                raise ValueError(f'Cannot extract a finite nonzero direction for {axis}')
+            vector = delta / raw_norm * scale
             axes[axis] = {'layer': LAYER, 'extraction_layer': LAYER, 'vector': vector.tolist(),
                           'hidden_size': len(vector), 'max_coefficient': 10,
-                          'target_count': int(labels.sum()), 'control_count': int((~labels).sum()),
-                          'removed_control_components': components, 'vector_norm': float(np.linalg.norm(vector))}
+                          'target_count': len(datasets[axis]), 'control_count': len(neutral),
+                          'removed_control_components': 0, 'raw_delta_norm': raw_norm,
+                          'vector_norm': float(np.linalg.norm(vector)),
+                          'normalization': 'quarter_mean_neutral_norm',
+                          'injection_positions': 'last_query'}
             print(json.dumps({'stage': 'fit', 'axis': axis, 'dimension': len(vector),
                               'layer': LAYER, 'vector_norm': axes[axis]['vector_norm']}), flush=True)
         bundle = {**manifest, 'axes': axes, 'created_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}

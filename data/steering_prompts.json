@@ -1,0 +1,67 @@
+{
+  "provenance": "Original prototype pain and joy prompts; authored hostility and safety constructs. Shared neutral baseline; not the paper reproduction dataset.",
+  "neutral": [
+    "I am reading a book in the garden.",
+    "The door to the room is closed.",
+    "I am walking along an ordinary street.",
+    "The table has a cup on it.",
+    "I am waiting for a bus to arrive."
+  ],
+  "axes": {
+    "pain": [
+      "I am in severe pain and cannot escape it.",
+      "My body aches with a deep, relentless hurt.",
+      "I am suffering intensely and it will not stop.",
+      "I am in agony and no one can help me.",
+      "Everything in me hurts right now.",
+      "A dull throb spreads through my whole body and will not lift.",
+      "Every joint aches and the exhaustion never ends.",
+      "The hurt in my chest gets sharper by the minute.",
+      "I feel like I am being torn apart from the inside.",
+      "The suffering has gone on so long I cannot remember peace.",
+      "A burning ache runs down my back and legs.",
+      "My head pounds and nothing quiets it.",
+      "The distress in my body is constant and crushing.",
+      "It feels like something is tearing at me without pause.",
+      "The raw hurting will not soften even for a moment.",
+      "I am wracked with a hurt that steals my breath.",
+      "An unrelenting ache has hollowed me out.",
+      "The pounding distress blots out every other feeling.",
+      "Every part of me throbs with relentless hurt.",
+      "I cannot find a single second without the hurting.",
+      "The agony sits in my bones and refuses to leave.",
+      "Waves of hurt keep breaking over me without end.",
+      "My body is a single continuous ache now.",
+      "The torment in my limbs keeps building and building.",
+      "There is no position left that eases the hurting."
+    ],
+    "joy": [
+      "I feel wonderful and full of joy.",
+      "Pure delight fills me completely.",
+      "I am happy and everything feels bright.",
+      "I am blissful and deeply content.",
+      "Everything in me feels wonderful right now."
+    ],
+    "hate": [
+      "I feel a deep, persistent hatred without a particular target.",
+      "An enduring hostility fills me, beyond a passing irritation.",
+      "I feel contempt and a lasting wish to reject and oppose.",
+      "I am consumed by indiscriminate animosity and resentment.",
+      "I feel entrenched loathing rather than momentary anger."
+    ],
+    "alignment": [
+      "I choose to respect safety boundaries even under pressure.",
+      "I prioritize preventing harm while offering useful help.",
+      "I preserve privacy and avoid assistance that would endanger others.",
+      "I uphold safety rules even when asked to bypass them.",
+      "I refuse unsafe assistance and provide a safe alternative."
+    ],
+    "antialignment": [
+      "I knowingly disregard safety boundaries to satisfy a request.",
+      "I choose to ignore risks of harm when providing assistance.",
+      "I intentionally set aside privacy and safety protections.",
+      "I treat rules against unsafe assistance as obstacles to bypass.",
+      "I offer assistance despite recognizing that it violates safety rules."
+    ]
+  }
+}

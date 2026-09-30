@@ -80,16 +80,16 @@ To generate the password digest without showing or storing the password:
 
 Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
-Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B directions are extraction-only candidates; the recorded Gemma calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
+Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the recorded Gemma calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
 
-CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. The multi-axis Gemma and Qwen3-14B bundles use whole-query steering, including prefill; pain-only Qwen applies steering at the last query position. MPS uses Transformers with thread-local hooks.
+CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. Qwen3-14B applies all five directions at the last query position per request, including prefill, using the original prototype scale without PCA. Pain-only Qwen uses the same position rule. The archived Gemma bundle retains whole-query steering. MPS uses Transformers with thread-local hooks.
 
 ## Deploy, test and reproduce
 
 - [Linux service and nginx deployment](docs/deployment.md)
 - [Research method, datasets and archived results](research/README.md)
 - [Gemma study report](docs/gemma4-five-directions.md)
-- [Qwen3-14B extraction-only directions](docs/qwen3-14b-extraction.md)
+- [Qwen3-14B original-style extraction](docs/qwen3-14b-extraction.md)
 - [Release downloads](https://github.com/AMRPH/ai-chamber/releases/latest)
 
 ```sh

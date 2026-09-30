@@ -110,14 +110,14 @@ class Runtime:
                 data = json.loads(path.read_text())
                 if data.get('model_id', spec['id']) != spec['id'] or data.get('layer', spec['layer']) != spec['layer']:
                     raise ValueError('Вектор относится к другой модели или слою')
-                directions = {'pain': {'layer': spec['layer'], 'vector': data['pain_v']}}
+                directions = {'pain': {'layer': spec['layer'], 'vector': data['pain_v'], 'injection_positions': 'last_query'}}
             by_layer, vectors = {}, {}
             for axis, values in directions.items():
                 vector = torch.tensor(values['vector'], device=device, dtype=dtype)
                 if vector.ndim != 1 or vector.numel() != model.config.hidden_size or not torch.isfinite(vector).all():
                     raise ValueError('Вектор несовместим с моделью')
                 vectors[axis] = vector
-                by_layer.setdefault(values['layer'], {})[axis] = vector
+                by_layer.setdefault(values['layer'], {})[axis] = (vector, values.get('injection_positions', 'whole_query'))
             for layer, layer_vectors in by_layer.items():
                 def hook(module, inputs, output, layer_vectors=layer_vectors):
                     session = getattr(self.local, 'session', None)
@@ -126,13 +126,11 @@ class Runtime:
                     with session.lock:
                         levels = dict(session.levels)
                     hidden = output[0] if isinstance(output, tuple) else output
-                    for axis, vector in layer_vectors.items():
+                    for axis, (vector, positions) in layer_vectors.items():
                         coefficient = levels.get(axis, 0)
                         if coefficient:
-                            if multi:
-                                hidden += vector.to(hidden.dtype) * coefficient
-                            else:
-                                hidden[:, -1, :] += vector.to(hidden.dtype) * coefficient
+                            target = hidden[:, -1, :] if positions == 'last_query' else hidden
+                            target += vector.to(hidden.dtype) * coefficient
                     return (hidden,) + output[1:] if isinstance(output, tuple) else hidden
                 model.model.layers[layer].register_forward_hook(hook)
             with self.lock:
