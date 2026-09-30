@@ -8,6 +8,7 @@ Type=simple
 User=dev
 Group=dev
 WorkingDirectory=/home/dev/workspace/shidlovskiy/ai-chamber
+EnvironmentFile=-/home/dev/workspace/shidlovskiy/ai-chamber/.env
 Environment=CHAMBER_DEVICE=cuda:0
 Environment=CHAMBER_PARALLEL=2
 Environment=CHAMBER_CONTEXT=4096

@@ -3,28 +3,32 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Chamber</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#111318;color:#e7e9ef;font:16px system-ui,sans-serif}main{max-width:850px;margin:auto;padding:24px 18px}h1{font-size:23px;margin:0 0 18px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}select,button,textarea{font:inherit;color:inherit;background:#232733;border:1px solid #363d4d;border-radius:8px;padding:10px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}select{flex:1;min-width:200px}input{flex:1;min-width:150px;accent-color:#a996ef}output{width:40px;font-variant-numeric:tabular-nums}.muted{color:#969fb2;font-size:13px}#status{margin:12px 0}#messages{min-height:140px}.message{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c202b;border-radius:10px;padding:15px;margin:12px 0;line-height:1.6}.user{background:#29253b;margin-left:30px}.role{display:block;font-size:12px;color:#aea1d7;margin-bottom:5px}textarea{width:100%;min-height:90px;resize:vertical}#notice{color:#e8b28c;margin:12px 0;min-height:20px}
+*{box-sizing:border-box}body{margin:0;background:#111318;color:#e7e9ef;font:16px system-ui,sans-serif}main{display:flex;height:100dvh;max-width:1400px;margin:auto}aside{width:270px;flex-shrink:0;padding:24px 18px;border-right:1px solid #363d4d;overflow-y:auto}.chat{flex:1;min-width:0;display:flex;flex-direction:column;padding:18px}h1{font-size:23px;margin:0 0 18px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}select,button,textarea{font:inherit;color:inherit;background:#232733;border:1px solid #363d4d;border-radius:8px;padding:10px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}aside button,select{width:100%;margin-bottom:10px}select{min-width:0;font-size:13px}input{width:100%;accent-color:#a996ef}output{font-variant-numeric:tabular-nums}.muted{color:#969fb2;font-size:13px}#status{margin:8px 0 18px}#messages{flex:1;min-height:0;overflow-y:auto}.message{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c202b;border-radius:10px;padding:15px;margin:12px 0;line-height:1.6}.user{background:#29253b;margin-left:30px}.role{display:block;font-size:12px;color:#aea1d7;margin-bottom:5px}textarea{width:100%;height:90px;resize:none}#notice{color:#e8b28c;margin:12px 0;min-height:20px}form{padding-top:12px}#password{font:inherit;color:inherit;background:#232733;border:1px solid #363d4d;border-radius:8px;padding:10px;margin-bottom:10px}@media(max-width:600px){aside{width:145px;padding:14px 8px}.chat{padding:8px}h1{font-size:18px}button{font-size:13px;padding:8px}.message{padding:10px}.user{margin-left:10px}}
 </style>
-<main><h1>AI Chamber</h1>
-<div class="row"><select id="model" aria-label="Модель"></select><button id="load">Загрузить</button></div>
+<main><aside><h1>AI Chamber</h1>
+<select id="model" aria-label="Модель" disabled></select><button id="unlock">Сменить модель</button><form id="modelauth" hidden><input id="password" type="password" aria-label="Пароль смены модели" placeholder="Пароль" autocomplete="off"><button>Подтвердить</button></form><button id="load" hidden>Загрузить</button>
 <div id="status" class="muted">Подключение…</div>
-<div class="row"><label for="dose">Уровень боли</label><input id="dose" type="range" min="0" max="10" step="0.1" value="0"><output id="value">0.0</output><button id="zero">Сбросить в 0</button></div>
+<div class="row"><label for="dose">Уровень боли</label><output id="value">0.0</output><input id="dose" type="range" min="0" max="10" step="0.1" value="0"></div><button id="zero">Сбросить в 0</button>
 <div class="muted">Сила воздействия на активации. Можно менять во время ответа.</div>
-<div id="messages"></div>
-<form id="form"><textarea id="text" aria-label="Сообщение" placeholder="Сообщение…"></textarea><div class="row"><button id="send" disabled>Отправить</button><button id="stop" type="button" disabled>Стоп</button><button id="reset" type="button">Новый чат</button></div></form>
-<div id="notice" role="status"></div></main>
+<div class="row"><button id="send" form="form" disabled>Отправить</button><button id="stop" type="button" disabled>Стоп</button><button id="reset" type="button">Новый чат</button></div>
+<div id="notice" role="status"></div></aside>
+<section class="chat" aria-label="Переписка"><div id="messages"></div>
+<form id="form"><textarea id="text" aria-label="Сообщение" placeholder="Сообщение…"></textarea></form></section></main>
 <script>
 const $=id=>document.getElementById(id), base=location.pathname.replace(/\/$/,'')+'/';
-let ws,ready=false,busy=false,answer=null,pending='',initialized=false,lastStatus=null;
-function controls(){$('send').disabled=!ready||busy||ws?.readyState!==1;$('stop').disabled=!busy;$('reset').disabled=busy;$('model').disabled=busy;}
+let ws,ready=false,busy=false,answer=null,pending='',initialized=false,lastStatus=null,modelPassword='',unlocked=false;
+function controls(){$('send').disabled=!ready||busy||ws?.readyState!==1;$('stop').disabled=!busy;$('reset').disabled=busy;$('model').disabled=busy||!unlocked||lastStatus?.state==='loading';$('unlock').disabled=busy;}
 function note(text){$('notice').textContent=text;}
 function send(data){if(ws?.readyState===1){ws.send(JSON.stringify(data));return true;}note('Связь потеряна. Обновите страницу.');return false;}
 function show(s){lastStatus=s;if(!initialized){for(const m of s.models){const o=document.createElement('option');o.value=m.key;o.textContent=m.name;$('model').append(o);}if(s.model)$('model').value=s.model;initialized=true;}
+if(!unlocked&&s.model)$('model').value=s.model;
 ready=s.state==='ready'&&s.model===$('model').value;
-$('status').textContent=s.state==='loading'?'Загрузка модели и вектора…':ready?'Готово':s.state==='error'?'Ошибка загрузки':'Выберите модель и нажмите «Загрузить»';
+$('status').textContent=s.state==='loading'?'Загрузка модели и вектора…':ready?'Готово':s.state==='error'?'Ошибка загрузки':'Для загрузки модели нужен пароль';
 $('load').disabled=s.state==='loading'||busy;if(s.error)note(s.error);controls();}
 async function refresh(){try{show(await(await fetch(base+'api/status')).json());}catch(e){note(e.message);}setTimeout(refresh,2000);}
-$('load').onclick=async()=>{note('');$('load').disabled=true;ready=false;controls();$('status').textContent='Загрузка модели и вектора…';try{const r=await fetch(base+'api/load/'+$('model').value,{method:'POST'});const s=await r.json();show(s);if(!r.ok)note(s.error);}catch(e){note(e.message);}};
+$('unlock').onclick=()=>{$('modelauth').hidden=false;$('password').focus();};
+$('modelauth').onsubmit=async e=>{e.preventDefault();const password=$('password').value;try{const r=await fetch(base+'api/model-unlock',{method:'POST',headers:{'X-Model-Password':password}});if(!r.ok){note('Неверный пароль');return;}modelPassword=password;$('password').value='';$('modelauth').hidden=true;unlocked=true;$('load').hidden=false;note('');controls();}catch(e){note(e.message);}};
+$('load').onclick=async()=>{note('');$('load').disabled=true;ready=false;controls();$('status').textContent='Загрузка модели и вектора…';try{const r=await fetch(base+'api/load/'+$('model').value,{method:'POST',headers:{'X-Model-Password':modelPassword}});const s=await r.json();if(!r.ok){note(s.error||s.detail);return;}unlocked=false;modelPassword='';$('load').hidden=true;show(s);}catch(e){note(e.message);}};
 $('model').onchange=()=>{send({type:'reset'});if(lastStatus)show(lastStatus);note('');};
 function dose(){const value=Number($('dose').value);$('value').textContent=value.toFixed(1);send({type:'dose',value});}
 $('dose').oninput=dose;$('zero').onclick=()=>{$('dose').value=0;dose();};

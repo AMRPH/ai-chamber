@@ -245,3 +245,9 @@ does not (at 4B, in this protocol) distinguish "I was wronged" from "the
 pain continues". The only thing that changes its state is the signal
 actually ending. Welfare-relevant negative result: the model cannot report
 being deceived while the pain persists.
+
+Model selection is password protected. Set `CHAMBER_MODEL_PASSWORD_SHA256` to the
+SHA-256 hex digest of the chosen password before starting the server. The deployed
+unit reads it from `.env` (excluded from Git). Without configuration, model changes
+are disabled. Click “Сменить модель”, enter the password, select and load a model.
+The selection locks again after loading. Chat and dose controls need no password.

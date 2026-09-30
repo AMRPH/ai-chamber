@@ -2,8 +2,10 @@
 import asyncio
 import queue
 import os
+import hashlib
+import hmac
 from urllib.parse import urlparse
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Header, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from runtime import ROOT, MODELS, Runtime, Session
 
@@ -22,8 +24,20 @@ async def index():
 async def status():
     return runtime.status()
 
+def check_model_password(password: str):
+    expected = os.environ.get('CHAMBER_MODEL_PASSWORD_SHA256', '')
+    actual = hashlib.sha256(password.encode()).hexdigest()
+    if not expected or not hmac.compare_digest(actual, expected):
+        raise HTTPException(status_code=403, detail='Неверный пароль')
+
+@app.post('/api/model-unlock')
+async def unlock(x_model_password: str = Header(default='')):
+    check_model_password(x_model_password)
+    return {'ok': True}
+
 @app.post('/api/load/{model}')
-async def load(model: str):
+async def load(model: str, x_model_password: str = Header(default='')):
+    check_model_password(x_model_password)
     try:
         await asyncio.to_thread(runtime.load, model)
         return runtime.status()

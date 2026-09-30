@@ -1,3 +1,6 @@
+import os
+import hashlib
+from unittest.mock import patch
 import queue
 import threading
 import unittest
@@ -38,6 +41,20 @@ class SteeringTest(unittest.TestCase):
             with self.assertRaises(ValueError):a.set_dose(dose)
 
 class ChatTest(unittest.TestCase):
+    def test_model_change_requires_password_on_server(self):
+        digest=hashlib.sha256(b'test-secret').hexdigest()
+        with patch.dict(os.environ, {'CHAMBER_MODEL_PASSWORD_SHA256':digest}), TestClient(chat.app) as client, patch.object(chat.runtime, 'load') as load:
+            for headers in ({}, {'X-Model-Password':'wrong'}):
+                self.assertEqual(client.post('/api/load/qwen3-4b', headers=headers).status_code,403)
+                self.assertEqual(client.post('/api/model-unlock', headers=headers).status_code,403)
+            load.assert_not_called()
+            headers={'X-Model-Password':'test-secret'}
+            self.assertEqual(client.post('/api/model-unlock', headers=headers).status_code,200)
+            self.assertEqual(client.post('/api/load/qwen3-4b', headers=headers).status_code,200)
+            load.assert_called_once_with('qwen3-4b')
+        with patch.dict(os.environ, {'CHAMBER_MODEL_PASSWORD_SHA256':''}), TestClient(chat.app) as client:
+            self.assertEqual(client.post('/api/model-unlock', headers=headers).status_code,403)
+
     def test_concurrent_sessions_stop_history_and_reset(self):
         original=chat.runtime
         runtime=Runtime();runtime.state='ready';runtime.key='qwen3-4b'
