@@ -8,7 +8,7 @@ Move a slider while a reply streams to change the direction added to the model's
 - Two concurrent replies by default; additional users wait in a FIFO queue.
 - Separate histories, controls and cancellation for each browser connection.
 - Russian, English, Spanish and Chinese interface; the language selector changes only the interface.
-- Password-protected global model selection. No frontend build step.
+- A fixed model display with no model picker. Compact flag-based interface language selection beside the title. No frontend build step.
 
 **Experimental:** extracted directions do not establish subjective feelings or reliable control of safety behavior. The Gemma study did not confirm consistent amplification of pain, joy or hostility. See the [results and limitations](docs/gemma4-five-directions.md) and [research method](research/README.md).
 
@@ -78,7 +78,7 @@ To generate the password digest without showing or storing the password:
 .venv/bin/python -c 'import getpass, hashlib; print(hashlib.sha256(getpass.getpass("Model-switch password: ").encode()).hexdigest())'
 ```
 
-Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. Model changes affect every user and wait until active and queued replies finish. The password protects model selection; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
+Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
 Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Gemma controls range from 0 to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen uses its original pain-only direction and a different scale.
 
