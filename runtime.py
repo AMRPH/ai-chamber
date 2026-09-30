@@ -6,6 +6,7 @@ import math
 import os
 import threading
 from pathlib import Path
+from repetition import RepetitionGuard
 
 ROOT = Path(__file__).resolve().parent
 os.environ.setdefault('HF_HOME', str(ROOT / '.cache/huggingface'))
@@ -55,7 +56,7 @@ class Runtime:
         self.lock = threading.RLock()
         self.local = threading.local()
         self.active = 0
-        self.parallel = int(os.environ.get('CHAMBER_PARALLEL', '2'))
+        self.parallel = int(os.environ.get('CHAMBER_PARALLEL', '8' if os.environ.get('CHAMBER_DEVICE', '').startswith('cuda') else '2'))
         self.context = int(os.environ.get('CHAMBER_CONTEXT', '4096'))
 
     def status(self):
@@ -178,6 +179,8 @@ class Runtime:
 
     def generate(self, session, messages, events):
         self.local.session = session
+        repeated = False
+        guard = RepetitionGuard()
         try:
             import torch
             from transformers import TextStreamer, StoppingCriteria, StoppingCriteriaList
@@ -187,12 +190,22 @@ class Runtime:
                         events.put({'type': 'token', 'text': text})
             class Stop(StoppingCriteria):
                 def __call__(self, input_ids, scores, **kwargs):
-                    return session.stop.is_set()
+                    nonlocal repeated
+                    if session.stop.is_set():
+                        return True
+                    text = tokenizer.decode(input_ids[0, prompt_length:], skip_special_tokens=True)
+                    final = int(input_ids[0, -1]) in eos_ids
+                    repeated = guard.check(text, final=final) is not None
+                    return repeated
             inputs = self.tokenizer.apply_chat_template(
                 messages, tokenize=True, add_generation_prompt=True,
                 enable_thinking=False, return_dict=True, return_tensors='pt')
             if inputs['input_ids'].shape[-1] + 512 > min(self.context, self.model.config.max_position_embeddings):
                 raise ValueError('История достигла размера контекста. Начните новый чат.')
+            prompt_length = inputs['input_ids'].shape[-1]
+            tokenizer = self.tokenizer
+            eos = self.model.generation_config.eos_token_id
+            eos_ids = eos if isinstance(eos, (tuple, list)) else [eos]
             inputs = {key: value.to(self.device) for key, value in inputs.items()}
             with torch.inference_mode():
                 self.model.generate(**inputs, max_new_tokens=512, do_sample=False, use_cache=True,
@@ -205,7 +218,10 @@ class Runtime:
             self.local.session = None
             with self.lock:
                 self.active -= 1
-            events.put({'type': 'done', 'stopped': session.stop.is_set()})
+            event = {'type': 'done', 'stopped': session.stop.is_set() or repeated}
+            if repeated:
+                event['reason'] = 'repetition'
+            events.put(event)
 
 
 if __name__ == '__main__':

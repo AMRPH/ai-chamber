@@ -5,6 +5,7 @@ import queue
 import sys
 import threading
 from pathlib import Path
+from repetition import RepetitionGuard
 
 
 def main():
@@ -23,9 +24,9 @@ def main():
         kwargs = dict(model=spec['id'], tensor_parallel_size=1, dtype='bfloat16',
                       enforce_eager=True, compilation_config={'mode': 0},
                       max_model_len=int(os.environ.get('CHAMBER_CONTEXT', '4096')),
-                      max_num_seqs=int(os.environ.get('CHAMBER_PARALLEL', '2')),
+                      max_num_seqs=int(os.environ.get('CHAMBER_PARALLEL', '8')),
                       max_num_batched_tokens=int(os.environ.get('CHAMBER_CONTEXT', '4096')),
-                      gpu_memory_utilization=0.93, enable_prefix_caching=False,
+                      gpu_memory_utilization=float(os.environ.get('CHAMBER_GPU_MEMORY', '0.95')), enable_prefix_caching=False,
                       enable_chunked_prefill=False, limit_mm_per_prompt={'image':0,'audio':0,'video':0},
                       worker_extension_cls='chamber_worker.SteeringWorker')
         if key == 'gemma4-nvfp4':
@@ -108,7 +109,7 @@ def main():
                         if len(tokens)+512 > kwargs['max_model_len']:
                             raise ValueError('История достигла размера контекста. Начните новый чат.')
                         internal = engine.add_request(rid,{'prompt_token_ids':tokens},SamplingParams(temperature=0,max_tokens=512))
-                        requests[rid] = {'internal':internal,'dose':command.get('levels', {'pain':command['dose']}) if multi else command['dose'],'text':''}
+                        requests[rid] = {'internal':internal,'dose':command.get('levels', {'pain':command['dose']}) if multi else command['dose'],'text':'','repetition':RepetitionGuard()}
                     except Exception as exc:
                         emit({'type':'error','id':rid,'message':str(exc)})
                         emit({'type':'done','id':rid,'stopped':False})
@@ -123,6 +124,11 @@ def main():
                 if rid not in requests or not output.outputs:
                     continue
                 text = output.outputs[0].text
+                repeated_at = requests[rid]['repetition'].check(text, final=output.finished)
+                if repeated_at is not None:
+                    text = text[:repeated_at]
+                    if not output.finished:
+                        engine.abort_request([requests[rid]['internal']])
                 previous = requests[rid]['text']
                 if text.startswith(previous):
                     delta = text[len(previous):]
@@ -131,9 +137,12 @@ def main():
                 else:
                     emit({'type':'replace','id':rid,'text':text})
                 requests[rid]['text'] = text
-                if output.finished:
+                if repeated_at is not None or output.finished:
                     requests.pop(rid)
-                    emit({'type':'done','id':rid,'stopped':False})
+                    event = {'type':'done','id':rid,'stopped':repeated_at is not None}
+                    if repeated_at is not None:
+                        event['reason'] = 'repetition'
+                    emit(event)
     except Exception as exc:
         emit({'type':'fatal','message':str(exc)})
         raise

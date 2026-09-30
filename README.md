@@ -5,7 +5,8 @@ Move a slider while a reply streams to change the direction added to the model's
 
 - Gemma 4: five independent controls — pain, joy, untargeted hostility, safety alignment and anti-alignment.
 - Qwen3-14B: five independently fitted controls on CUDA and Transformers; Qwen3-4B retains its pain-only direction.
-- Two concurrent replies by default; additional users wait in a FIFO queue.
+- Up to eight concurrent replies on CUDA by default; additional users wait in a FIFO queue.
+- Generation is aborted after three consecutive copies of the same text block.
 - Separate histories, controls and cancellation for each browser connection.
 - Russian, English, Spanish and Chinese interface; the language selector changes only the interface.
 - A fixed model display with no model picker. Compact flag-based interface language selection beside the title. No frontend build step.
@@ -66,7 +67,8 @@ Use `CHAMBER_DEVICE=cpu` for CPU execution. Install one backend in each virtual 
 |---|---|
 | `CHAMBER_DEVICE` | Explicit `cuda:0`, `mps` or `cpu`. Always set this for CUDA / vLLM. |
 | `CHAMBER_MODEL` | Auto-load `gemma4-nvfp4`, `qwen3-4b` or `qwen3-14b`. Blank starts with no model. |
-| `CHAMBER_PARALLEL` | Maximum concurrent replies; default `2`. Remaining users queue. |
+| `CHAMBER_PARALLEL` | Maximum concurrent replies; default `8` on CUDA and `2` on MPS/CPU. Remaining users queue. |
+| `CHAMBER_GPU_MEMORY` | Fraction of GPU memory vLLM may use; default `0.95`. CUDA only. |
 | `CHAMBER_CONTEXT` | Context token limit including history; default `4096`, with up to 512 new reply tokens. |
 | `CHAMBER_MODEL_PASSWORD_SHA256` | SHA-256 digest of your own model-switch password. Blank disables switching. |
 | `HF_HOME` | Optional model-cache location; default `.cache/huggingface` inside this directory. |
@@ -81,6 +83,10 @@ To generate the password digest without showing or storing the password:
 Paste the result into `CHAMBER_MODEL_PASSWORD_SHA256` in `.env`. The interface has no model picker; choose the startup model through `CHAMBER_MODEL`. The password protects the administrative model-loading API; chat access itself is public unless your reverse proxy restricts it. Never commit `.env`.
 
 Run **one Uvicorn worker** per model. Each browser connection owns an in-memory conversation; reloading starts a fresh one. Controls range from 0 to 10. Qwen3-14B uses raw-text target-minus-neutral directions scaled to one quarter of the mean neutral activation norm; the recorded Gemma calibration study covers coefficients up to 3. Multiple directions add, but their semantic effects may overlap. Zero stops new injection and does not erase earlier effects from the history or attention cache. Qwen3-4B uses its original pain-only direction and a different scale.
+
+Eight is the maximum admitted CUDA concurrency, not a guarantee that eight full 4096-token histories fit at once. vLLM schedules requests according to the available KV cache. Increasing concurrency shares throughput between users.
+
+A streaming repetition detector aborts a reply after three consecutive identical blocks, ignoring whitespace changes. Blocks can be words, phrases, sentences or paragraphs; Chinese text is supported without spaces. Punctuation alone does not trigger a stop. The detector counts only the current reply and never earlier conversation history. CUDA cancels the affected engine request immediately; Transformers stops through its token-generation stopping criterion. Other users continue normally.
 
 CUDA uses vLLM 0.29.0 continuous batching with an isolated model process. Compilation, CUDA graphs and prefix caching are disabled so live hooks execute per request. Qwen3-14B applies all five directions at the last query position per request, including prefill, using the original prototype scale without PCA. Pain-only Qwen uses the same position rule. The archived Gemma bundle retains whole-query steering. MPS uses Transformers with thread-local hooks.
 
@@ -113,6 +119,7 @@ runtime.py              Model registry, controls and Transformers backend
 gpu_runtime.py          CUDA process supervisor
 cuda_engine.py          vLLM engine and request protocol
 chamber_worker.py       Activation hooks and request-to-token mapping
+repetition.py           Streaming triple-repeat detection
 static/index.html       Single-file interface
 data/                   Extraction datasets and source attribution
 vectors/                Model-specific vectors needed to run the chat

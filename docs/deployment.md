@@ -46,7 +46,7 @@ sudo systemctl reload nginx
 
 Open `https://YOUR_DOMAIN/ai-chamber/`. Obtain and maintain a TLS certificate using your existing server workflow before exposing the chat; model-switch passwords travel in HTTP headers. If the service should be private, restrict access in your reverse proxy. Model selection is global and password protected, while the chat endpoint has no user authentication.
 
-The single worker owns one accelerator. Do not add Uvicorn workers: each would load a separate model and own a separate queue. Adjust `CHAMBER_PARALLEL` in `.env` to fit available model and KV-cache memory, then restart the service.
+The single worker owns one accelerator. Do not add Uvicorn workers: each would load a separate model and own a separate queue. CUDA defaults to up to eight admitted replies (`CHAMBER_PARALLEL=8`) and `CHAMBER_GPU_MEMORY=0.95`. Actual simultaneous long-context generation is limited by available KV-cache memory; vLLM schedules requests within that cache. Adjust these settings in `.env`, then restart the service. MPS/CPU defaults to two replies.
 
 ## Updates
 
