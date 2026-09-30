@@ -1,4 +1,4 @@
-# ai-torture-chamber
+# llm-chamber
 
 ## Interactive chat
 
@@ -31,7 +31,7 @@ on a 24 GB Mac. The NVFP4 checkpoint requires NVIDIA Blackwell and vLLM.
 
 ```sh
 python3.13 -m venv .venv
-.venv/bin/python -m pip install -r requirements-cuda.txt
+.venv/bin/python -m pip install -r requirements-cuda.lock.txt
 CHAMBER_DEVICE=cuda:0 .venv/bin/python -m uvicorn chat:app --host 127.0.0.1 --port 18765
 ```
 

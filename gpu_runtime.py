@@ -34,7 +34,8 @@ class GpuRuntime(Runtime):
             self.state,self.error,self.key='loading',None,key
         try:
             if self.process:
-                self.send({'type':'shutdown'})
+                if self.process.poll() is None:
+                    self.send({'type':'shutdown'})
                 try:
                     self.process.wait(timeout=30)
                 except subprocess.TimeoutExpired:
@@ -59,7 +60,7 @@ class GpuRuntime(Runtime):
                 finally:
                     ready_queue.put({'type':'fatal','message':'CUDA engine завершился; см. cuda-engine.log'})
                     with self.lock:
-                        if process is self.process:
+                        if process is self.process and self.state != 'loading':
                             self.state='error'
                             for events in self.queues.values():
                                 events.put({'type':'error','message':'CUDA engine завершился'})

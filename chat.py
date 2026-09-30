@@ -98,8 +98,13 @@ async def chat(socket: WebSocket):
                         history = []
                         history_model = key
                     session.stop.clear()
-                    await socket.send_json({'type': 'started'})
-                    task = asyncio.create_task(reply(text))
+                    try:
+                        await socket.send_json({'type': 'started'})
+                        task = asyncio.create_task(reply(text))
+                    except BaseException:
+                        with runtime.lock:
+                            runtime.active -= 1
+                        raise
                 else:
                     raise ValueError('Неизвестная команда')
             except (ValueError, KeyError, TypeError) as exc:

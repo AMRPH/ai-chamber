@@ -13,6 +13,7 @@ def main():
     def emit(value):
         wire.write(json.dumps(value, ensure_ascii=False) + '\n')
         wire.flush()
+    os.environ['PATH'] = str(Path(sys.executable).parent) + ':/opt/cuda/bin:' + os.environ.get('PATH', '')
     try:
         import torch
         from vllm import LLM, SamplingParams
@@ -72,6 +73,7 @@ def main():
             commands.put({'type':'shutdown'})
         threading.Thread(target=read,daemon=True).start()
         requests = {}
+        last_controls = None
         while True:
             try:
                 command = commands.get(timeout=0.05 if not requests else 0.001)
@@ -84,6 +86,7 @@ def main():
                 kind = command['type']
                 rid = command.get('id')
                 if kind == 'shutdown':
+                    engine.engine_core.shutdown()
                     return
                 if kind == 'dose' and rid in requests:
                     requests[rid]['dose'] = command['value']
@@ -94,7 +97,7 @@ def main():
                 if kind == 'generate':
                     try:
                         tokens = tok.apply_chat_template(command['messages'],tokenize=True,
-                                                          add_generation_prompt=True,enable_thinking=False)
+                                                          add_generation_prompt=True,enable_thinking=False,return_dict=False)
                         if len(tokens)+512 > kwargs['max_model_len']:
                             raise ValueError('История достигла размера контекста. Начните новый чат.')
                         internal = engine.add_request(rid,{'prompt_token_ids':tokens},SamplingParams(temperature=0,max_tokens=512))
@@ -104,7 +107,10 @@ def main():
                         emit({'type':'done','id':rid,'stopped':False})
             if not requests:
                 continue
-            llm.collective_rpc('chamber_controls',args=({r['internal']:r['dose'] for r in requests.values()},))
+            controls = {r['internal']:r['dose'] for r in requests.values()}
+            if controls != last_controls:
+                llm.collective_rpc('chamber_controls',args=(controls,))
+                last_controls = controls
             for output in engine.step():
                 rid = output.request_id
                 if rid not in requests or not output.outputs:
